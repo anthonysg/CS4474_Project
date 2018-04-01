@@ -90,6 +90,45 @@
         background-color: #4F2683;
         color: #f9f9f9;
     }
+
+    #wrapper {
+        display: flex;
+        height: 100%;
+    }
+
+    #wrapper > div {
+        flex-basis: 0;
+    }
+
+    #wrapper > div:first-of-type { 
+        background-color: #F9F9F9;
+        flex-grow: 9;
+    }
+
+    #wrapper > div:nth-of-type(2) { 
+        flex-grow: 12;
+        background-color: white;
+        border: solid #EFF0F1;
+        border-width: 0 1px;
+    }
+    
+    #wrapper > div:nth-of-type(3) { 
+        flex-grow: 7;
+        background-color: #F9F9F9;
+    }
+
+    #course-registration {
+        padding: 15px 30px;
+    }
+
+    #course-registration p {
+        font-family: Helvetica, Arial, sans-serif;
+        margin: 10px 0px;
+    }
+
+    #course-registration .title {
+        font-size: 18px;
+    }
 }
 </style>
 <!DOCTYPE html>
@@ -99,6 +138,7 @@
 </head>
 
 <body>
+    <!-- NAVIGATION -->
     <div id="nav">
         <li>
             <img src="images/icon-western.png">
@@ -137,13 +177,25 @@
             </li>
         </ul>
     </div>
+    <!-- MAIN CONTENT -->
+    <div id="wrapper">
+        <div id="c1">
+        </div>
+        <div id="c2">
+            <div id="course-registration">
+                <p class="title">Course Registration</p>
+                <p style="color: gray; font-size: 14px;">Year 2 - 2017/2018</p>
+            </div>
+        </div>
+        <div id="c3">
+        </div>
+    </div>
 </body>
 </html>
 
 <script>
-
 $(document).ready(function() {
-    /* Toggle between hiding and showing the dropdown content */
+    // Toggle between hiding and showing the dropdown content
     $(".dropbtn").click(function(e) {
         e.stopPropagation();
         $(this).parent().siblings().find(".dropdown-content").removeClass("show"); // hide other menus
@@ -155,6 +207,4 @@ $(document).ready(function() {
         $(".dropdown-content").removeClass("show");
     });
 });
-
-
 </script>
