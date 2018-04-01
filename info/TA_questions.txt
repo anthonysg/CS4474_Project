@@ -1,0 +1,50 @@
+Hello,
+
+I was going to ask in person but actually I think it would be easier for me to ask via owl since there are a number of questions I have about the tram project.
+
+1) In the Dropbox document you helped provide, you mention the potential idea of creating a system that helps students pick their degree and the courses they would take throughout their several years of study. I think the group likes this idea based on their feedback atleast at this point, so I am wondering if you could confirm that this is the right interpretation of the idea. 
+
+2) I have an abstract design I can think of that would consist of a few (3-4) web pages. Is this okay? Is the scope supposed to be bigger/smaller than this?
+
+3) Does the toolset matter? We will probably end up using a fair bit of javascript. Is that okay?
+
+4) Should the designs contain Western University branding? Like do we still reference Student Center/Western in any way or do we treat this as a totally separate feature made for any potential university/college.
+
+5) Should data be saved? Should there be a way confirm the end result of your selections as a user?
+
+Thanks
+
+-Anthony
+
+Hi Anthony,
+
+1) Yes, it's about picking (both initially and adjusting as needed), and tracking its completion.
+
+2) The design stage document (which is due shortly) requires (alongside an executive/high-level description) -- a storyboard (visuals) and a script (written descriptions) for the full scope of the prototype's potential functionality. So regarding the number of storyboard "sections", there is no specific number, but just that it covers the full functionality. However, I see you are using "webpages", and that scares me into thinkings there's a slip back into the "website/webpage" territory, which is not what Dr. Sedig wants. He wants Tools, which can either exist on an OS, i.e. desktop tool, or on the web, web tool. I will share some links to show you what the difference is.
+
+Webpage/site: https://www.student.uwo.ca https://www.reddit.com/ https://stackoverflow.com/ https://www.google.ca
+
+Websites are about going from a main page to subpages, reading, navigating between them, etc. That is not what we want.
+
+We want tools like: https://earth.nullschool.net/#current/wind/isobaric/1000hPa/overlay=wind_power_density/orthographic=-105.66,28.75,775/loc=-58.948,17.539 
+
+http://pelagios.org/maps/greco-roman/
+
+https://www.duolingo.com/
+
+http://studentservices.uwo.ca/secure/timetables/SummerTT/ttindex.cfm
+
+It would be somewhat accurate to describe them as "single page" applications, however it doesn't necessarily have to be a single page, technically. But the idea is the tool is there in front of the user, and its not about the user exploring pages of a website.
+
+3) No, as long as it follows the requirements and what I mentioned above.
+
+4) You can use Western branding, however remember that its not about re-designing what Western has, but using your experiences to generate a tool which can support the performance of a complex task. So when you talk about your design decisions, it cannot be about Western. It has to be about the task.
+
+5) Data persistence would definitely be a major element to a successful prototype. It doesn't feel good when your testing brand new software, and something goes wrong, and you lose all your progress. Doesn't demonstrate things very well.
+
+
+
+ 
+
+ 
+
