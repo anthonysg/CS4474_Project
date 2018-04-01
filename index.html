@@ -1,63 +1,160 @@
 <style>
-body {
-   margin: 0;
-}
+    body {
+        margin: 0;
+    }
+    
+    #nav {
+        list-style-type: none;
+        margin: 0;
+        padding: 0 25%;
+        overflow: hidden;
+        background-color: #4F2683;
+        display: flex;
+        align-items: center;
+    }
+    
+    #nav li {
+        float: left;
+    }
+    
+    #nav li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    
+    #nav li a:hover:not(.active) {
+        background-color: #807F83;
+    }
+    
+    #nav img {
+        display: block;
+        height: 30px;
+        padding: 5px;
+    }
+    
+    #nav #options {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        margin-left: auto;
+    }
 
-#nav {
-   list-style-type: none;
-   margin: 0;
-   padding: 0 25%;
-   overflow: hidden;
-   background-color: #4F2683;
-}
+    #nav #options img {
+        height: 20px;
+        padding: 10px;
+    }
 
-#nav li {
-    float: left;
-}
+    #nav .dropdown .dropbtn {
+        background-color: #4F2683; /* Purple background */
+        border: none; /* Remove borders */
+        color: white; /* White text */
+        padding: 0; /* Some padding */
+        cursor: pointer; /* Mouse pointer on hover */
+    }
+    #nav .dropdown {
+        float: left;
+        overflow: hidden;
+    }
 
-#nav li a {
-   display: block;
-   color: white;
-   text-align: center;
-   padding: 14px 16px;
-   text-decoration: none;
-}
+    #nav .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
 
-#nav li a:hover:not(.active) {
-    background-color: #807F83;
-}
+    #nav .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
 
-#nav img {
-   height: 30px;
-   padding: 5px;
-}
+    #nav .show {
+        display: block;
+    }
 
-#nav #options img {
-   height: 20px;
-   padding: 10px;
-   text-decoration: none;
+    #nav input {
+        padding: 6px;
+        margin-left: 15%;
+        border: none;
+        flex: 1;
+        background-color: #4F2683;
+        color: #f9f9f9;
+    }
 }
-
-#nav #options {
-   float: right;
-}
-
 </style>
-
 <!DOCTYPE html>
-<html>
+    <html>
 <head>
-
+    <script src="scripts/jquery-3.3.1.min.js"></script>
 </head>
-<body>
-<ul id="nav">
-   <li><img src="images/icon-western.png"></img></li>
-   <div id="options">
-      <li><img src="images/icon-plus.png"></img></li>
-      <li><img src="images/icon-notification.png"></img></li>
-      <li><img src="images/icon-user.png"></img></li>
-   </div>
-</ul>
 
+<body>
+    <div id="nav">
+        <li>
+            <img src="images/icon-western.png">
+        </li>
+        <input type="text" placeholder="Search My Courses" results="0">
+        <ul id="options">
+            <li class="dropdown">
+                <button class="dropbtn">
+                    <img src="images/icon-plus-20.png">
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </button>
+            </li>
+            <li class="dropdown">
+                <button class="dropbtn">
+                    <img src="images/icon-notification-20.png">
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </button>
+            </li>
+            <li class="dropdown">
+                <button class="dropbtn">
+                    <img src="images/icon-user-20.png">
+                    <div class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </button>
+            </li>
+        </ul>
+    </div>
 </body>
 </html>
+
+<script>
+
+$(document).ready(function() {
+    /* Toggle between hiding and showing the dropdown content */
+    $(".dropbtn").click(function(e) {
+        e.stopPropagation();
+        $(this).parent().siblings().find(".dropdown-content").removeClass("show"); // hide other menus
+        $(this).find(".dropdown-content").toggleClass("show");
+    });
+
+    // Close the dropdown if the user clicks outside of it
+    $("body").click(function() {
+        $(".dropdown-content").removeClass("show");
+    });
+});
+
+
+</script>
