@@ -118,16 +118,48 @@
     }
 
     #course-registration {
-        padding: 15px 30px;
-    }
-
-    #course-registration p {
-        font-family: Helvetica, Arial, sans-serif;
-        margin: 10px 0px;
+        padding: 20px 30px;
     }
 
     #course-registration .title {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 20px;
+        margin: 10px 0px;
+    }
+
+    #course-registration .panel {
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    }
+    
+    #course-registration span {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        margin: 10px 0px;
+        vertical-align: middle;
+    }
+
+    #course-registration .courses span {
+        margin: 10px 5px;
+    }
+
+    #course-registration .add-course span {
+        color: #4F2683;
+    }
+
+    #course-registration .semester {
+        font-family: Helvetica, Arial, sans-serif;
         font-size: 18px;
+    }
+
+    #course-registration img {
+        vertical-align: middle;
+    }
+
+    #course-registration .courses {
+        margin-left: 10px;
     }
 
     .accordion {
@@ -152,13 +184,6 @@
 
     .active:after {
         content: "\25B2";
-    }
-
-    .panel {
-        background-color: white;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.2s ease-out;
     }
 
     hr {
@@ -221,13 +246,36 @@
                 <p class="title">Course Registration</p>
                 <button class="accordion">Year 2 - 2017/2018</button>
                 <div class="panel">
-                  <p>Fall Semester</p>
-                  <hr>
-                  <p>CS2208A - Computer Architecture</p>
-                  <hr>
-                  <p>CS2210A - Data Structures and Algorithms</p>
-                  <hr>
-                  <p>GEO2060A - World Cities</p>
+                    <!-- FALL -->
+                    <img class="semester-icon" src="images/icon-fall-30.png">
+                    <span class="semester">Fall Semester</span>
+                    <hr>
+                    <div class="courses">
+                        <img class="semester-icon" src="images/icon-workstation-20.png">
+                        <span>CS2208A - Computer Architecture</span>
+                        <hr>
+                        <img class="semester-icon" src="images/icon-workstation-20.png">
+                        <span>CS2210A - Data Structures and Algorithms</span>
+                        <hr>
+                        <img class="semester-icon" src="images/icon-world-20.png">
+                        <span>GEO2060A - World Cities</span>
+                        <hr>
+                        <div class="add-course">
+                            <img class="semester-icon" src="images/icon-purple-plus-20.png">
+                            <span>Add course</span>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- WINTER -->
+                    <img class="semester-icon" src="images/icon-winter-30.png">
+                    <span class="semester">Winter Semester</span>
+                    <hr>
+                    <div class="courses">
+                        <div class="add-course">
+                            <img class="semester-icon" src="images/icon-purple-plus-20.png">
+                            <span>Add course</span>
+                        </div>
+                    </div>
                 </div>
                 <button class="accordion">Year 1 - 2016/2017</button>
                 <div class="panel">
