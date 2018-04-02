@@ -2,6 +2,34 @@
     body {
         margin: 0;
     }
+
+    .accordion {
+        background-color: white;
+        cursor: pointer;
+        border: none;
+        text-align: left;
+        color: gray;
+        outline: none;
+        padding: 10px 0px;
+        font-size: 14px;
+        transition: 0.4s;
+    }
+
+    .accordion:after {
+        content: '\25BC';
+        color: #777;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+    }
+
+    .active:after {
+        content: "\25B2";
+    }
+
+    hr {
+        border-top: 1px solid white;
+    }
     
     #nav {
         list-style-type: none;
@@ -15,18 +43,6 @@
     
     #nav li {
         float: left;
-    }
-    
-    #nav li a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-    }
-    
-    #nav li a:hover:not(.active) {
-        background-color: #807F83;
     }
     
     #nav img {
@@ -162,32 +178,43 @@
         margin-left: 10px;
     }
 
-    .accordion {
-        background-color: white;
-        cursor: pointer;
-        border: none;
-        text-align: left;
-        color: gray;
-        outline: none;
-        padding: 10px 0px;
-        font-size: 14px;
-        transition: 0.4s;
-    }
-
-    .accordion:after {
-        content: '\25BC';
-        color: #777;
-        font-weight: bold;
+    #progress {
+        width: 200px;
         float: right;
+    }
+
+    #progress div {
+        margin: 10px;
+        padding: 6px 10px;
+        background: grey;
+        border-radius: 6px;
+    }
+
+    #progress span, #progress p {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 13px;
+        font-weight: bold;
+        color: white;
+        vertical-align: middle;
+    }
+
+    #progress p {
+        text-align: center;
+        margin: 10px 0px;
+    }
+
+    #progress .progress-icon {
+        vertical-align: middle;
+    }
+
+    #progress .progress-img {
+        display: block;
+        margin: auto;
+        margin-top: 5px;
+    }
+
+    #progress-home span {
         margin-left: 5px;
-    }
-
-    .active:after {
-        content: "\25B2";
-    }
-
-    hr {
-        border-top: 1px solid white;
     }
 }
 </style>
@@ -201,7 +228,9 @@
     <!-- NAVIGATION -->
     <div id="nav">
         <li>
-            <img src="images/icon-western.png">
+            <a href="http://studentservices.uwo.ca/secure/timetables/mastertt/ttindex.cfm" target="_blank">
+                <img src="images/icon-western2.png">
+            </a>
         </li>
         <input type="text" placeholder="Search My Courses" results="0">
         <ul id="options">
@@ -239,8 +268,24 @@
     </div>
     <!-- MAIN CONTENT -->
     <div id="wrapper">
+        <!-- PROGRESS -->
         <div id="c1">
+            <div id="progress">
+                <div id="progress-home">
+                    <img class="progress-icon" src="images/icon-home-20.png">
+                    <span>Courses</span>
+                </div>
+                <div id="progress-major">
+                    <img class="progress-img" src="images/icon-fall-30.png">
+                    <p>Specialization in Computer Science</p>
+                </div>
+                <div id="progress-minor">
+                    <img class="progress-img" src="images/icon-diploma-40.png">
+                    <p>Minor in Software Engineering</p>
+                </div>
+            </div>
         </div>
+        <!-- COURSE REGISTRATION -->
         <div id="c2">
             <div id="course-registration">
                 <p class="title">Course Registration</p>
