@@ -129,6 +129,41 @@
     #course-registration .title {
         font-size: 18px;
     }
+
+    .accordion {
+        background-color: white;
+        cursor: pointer;
+        border: none;
+        text-align: left;
+        color: gray;
+        outline: none;
+        padding: 10px 0px;
+        font-size: 14px;
+        transition: 0.4s;
+    }
+
+    .accordion:after {
+        content: '\25BC';
+        color: #777;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+    }
+
+    .active:after {
+        content: "\25B2";
+    }
+
+    .panel {
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    }
+
+    hr {
+        border-top: 1px solid white;
+    }
 }
 </style>
 <!DOCTYPE html>
@@ -184,7 +219,20 @@
         <div id="c2">
             <div id="course-registration">
                 <p class="title">Course Registration</p>
-                <p style="color: gray; font-size: 14px;">Year 2 - 2017/2018</p>
+                <button class="accordion">Year 2 - 2017/2018</button>
+                <div class="panel">
+                  <p>Fall Semester</p>
+                  <hr>
+                  <p>CS2208A - Computer Architecture</p>
+                  <hr>
+                  <p>CS2210A - Data Structures and Algorithms</p>
+                  <hr>
+                  <p>GEO2060A - World Cities</p>
+                </div>
+                <button class="accordion">Year 1 - 2016/2017</button>
+                <div class="panel">
+                  <p>You shouldn't be here.</p>
+                </div>
             </div>
         </div>
         <div id="c3">
@@ -207,4 +255,20 @@ $(document).ready(function() {
         $(".dropdown-content").removeClass("show");
     });
 });
+
+// Accordian
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
 </script>
