@@ -27,9 +27,90 @@
         content: "\25B2";
     }
 
-    hr {
-        border-top: 1px solid white;
+    .modal {
+        display: none; 
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0,0.4);
     }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 20% auto 0% auto;
+        padding: 20px 20px 20px 40px;
+        width: 40%;
+        border-radius: 6px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    }
+
+    .modal-content p {
+        font-family: Helvetica, Arial, sans-serif;
+    }
+
+    .modal-content #modal-title {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .modal-content input {
+        border: none;
+        font-size: 16px;
+        vertical-align: middle;
+    }
+
+    .modal-content .modal-icon {
+        vertical-align: middle;
+    }
+
+    .modal-content #modal-results .modal-img {
+        display: block;
+        margin: auto;
+        margin-top: 30px;
+    }
+
+    .modal-content #modal-results p {
+        text-align: center;
+    }
+
+    .modal-content #modal-results #modal-search {
+        font-size: 16px;
+        color: lightgrey;
+    }
+
+    .modal-content hr {
+        margin: 5px 25px;
+    }
+
+    .modal-content button {
+        background-color: #4F2683;
+        color: white;
+        padding: 7px 14px;
+        border: none;
+        border-radius: 3px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    } 
     
     #nav {
         list-style-type: none;
@@ -64,12 +145,12 @@
         padding: 10px;
     }
 
-    #nav .dropdown .dropbtn {
-        background-color: #4F2683; /* Purple background */
-        border: none; /* Remove borders */
-        color: white; /* White text */
-        padding: 0; /* Some padding */
-        cursor: pointer; /* Mouse pointer on hover */
+    #nav .dropdown button {
+        background-color: #4F2683;
+        border: none;
+        color: white;
+        padding: 0;
+        cursor: pointer;
     }
     #nav .dropdown {
         float: left;
@@ -100,7 +181,8 @@
 
     #nav input {
         padding: 6px;
-        margin-left: 15%;
+        margin-left: 14%;
+        margin-right: 1%;
         border-radius: 3px;
         border: none;
         flex: 1;
@@ -163,6 +245,10 @@
         margin: 10px 5px;
     }
 
+    #course-registration .add-course {
+        cursor: pointer;
+    }
+
     #course-registration .add-course span {
         color: #4F2683;
     }
@@ -174,6 +260,10 @@
 
     #course-registration img {
         vertical-align: middle;
+    }
+
+    #course-registration hr {
+        border-top: 1px solid white;
     }
 
     #course-registration .courses {
@@ -192,7 +282,8 @@
         border-radius: 6px;
     }
 
-    #progress span, #progress p {
+    #progress span, 
+    #progress p {
         font-family: Helvetica, Arial, sans-serif;
         font-size: 13px;
         font-weight: bold;
@@ -220,9 +311,11 @@
     }
 }
 </style>
+
 <!DOCTYPE html>
-    <html>
+<html>
 <head>
+    <meta charset="utf-8"/>
     <script src="scripts/jquery-3.3.1.min.js"></script>
 </head>
 
@@ -234,10 +327,10 @@
                 <img src="images/icon-western2.png">
             </a>
         </li>
-        <input type="text" placeholder="Search My Courses" results="0">
+        <input type="text" placeholder="Search my courses">
         <ul id="options">
             <li class="dropdown">
-                <button class="dropbtn">
+                <button class="add-course">
                     <img src="images/icon-plus-20.png">
                     <div class="dropdown-content">
                         <a href="#">Link 1</a>
@@ -329,6 +422,22 @@
                   <p>You shouldn't be here.</p>
                 </div>
             </div>
+            <!-- MODAL -->
+            <div id="course-modal" class="modal">
+              <!-- Modal content -->
+              <div class="modal-content">
+                <span class="close">&times;</span>
+                <p id="modal-title">Add Course</p>
+                <img class="modal-icon" src="images/icon-search-20.png">
+                <input type="text" placeholder="Search courses">
+                <hr>
+                <div id="modal-results">
+                    <img class="modal-img" src="images/icon-search-20.png">
+                    <p id="modal-search">Nothing has been searched yet!</p>
+                </div>
+                <button id="modal-button">Add course</button>
+              </div>
+            </div>
         </div>
         <div id="c3">
         </div>
@@ -352,6 +461,22 @@ $(document).ready(function() {
 
     // Click first course accordion to open for user
     $(".accordion").first().click();
+
+    /* Modal click events */
+    // Displays Modal on add course click
+    $(".add-course").click(function() {
+        $("#course-modal").css("display", "block");
+    });
+
+    // Hides model on (x) click
+    $(".close").click(function() {
+        $("#course-modal").css("display", "none");
+    });
+
+    // Add course button
+    $("#modal-button").click(function(){
+
+    });
 });
 
 // Accordian
@@ -369,4 +494,14 @@ for (i = 0; i < acc.length; i++) {
     } 
   });
 }
+
+// Modal
+var modal = document.getElementById('course-modal');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+} 
 </script>
