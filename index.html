@@ -391,7 +391,7 @@
                     <img class="semester-icon" src="images/icon-fall-30.png">
                     <span class="semester">Fall Semester</span>
                     <hr>
-                    <div class="courses">
+                    <div class="courses" id="fall-courses">
                         <img class="semester-icon" src="images/icon-workstation-20.png">
                         <span>CS2208A - Computer Architecture</span>
                         <hr>
@@ -411,7 +411,14 @@
                     <img class="semester-icon" src="images/icon-winter-30.png">
                     <span class="semester">Winter Semester</span>
                     <hr>
-                    <div class="courses">
+                    <div class="courses" id="winter-courses">
+                        <!-- TEMPLATE -->
+                        <script id="handlebars-demo" type="text/x-handlebars-template">
+                            <img class="semester-icon" src="{{ courseImage }}">
+                            <span>{{ courseID }} - {{ courseName }}</span>
+                            <hr>
+                        </script>
+                        <!-- TEMPLATE COMPILATION -->
                         <div class="add-course">
                             <img class="semester-icon" src="images/icon-purple-plus-20.png">
                             <span>Add course</span>
@@ -420,28 +427,7 @@
                 </div>
                 <button class="accordion">Year 1 - 2016/2017</button>
                 <div class="panel">
-                    <!-- TEMPLATE -->
-                    <script id="handlebars-demo" type="text/x-handlebars-template">
-                       <div>
-                          My name is {{name}}. I am a {{occupation}}.
-                       </div>
-                    </script>
-                    <!-- TEMPLATE COMPILATION -->
-                    <script>
-                        // Retrieve the template data from the HTML (jQuery is used here).
-                        var template = $('#handlebars-demo').html();
-
-                        // Compile the template data into a function
-                        var templateScript = Handlebars.compile(template);
-
-                        var context = { "name" : "Paul Bartlett", "occupation" : "bad developer" };
-
-                        // html = 'My name is Ritesh Kumar. I am a developer.'
-                        var html = templateScript(context);
-
-                        // Insert the HTML code into the page
-                        $(".courses").append(html);
-                        </script>
+                    
                 </div>
             </div>
             <!-- MODAL -->
@@ -466,6 +452,40 @@
     </div>
 </body>
 </html>
+
+<script>
+
+    $.ajaxSetup({beforeSend: function(xhr) {
+        if (xhr.overrideMimeType) {
+          xhr.overrideMimeType("application/json");
+        }
+      }
+    });
+
+    $.getJSON("data/user.json", userCallback);
+
+    var userData;
+
+    function userCallback(data) {
+        userData = data;
+
+        // Retrieve the template data from the HTML (jQuery is used here).
+        var template = $('#handlebars-demo').html();
+
+        // Compile the template data into a function
+        var templateScript = Handlebars.compile(template);
+
+
+
+        // html = 'My name is Ritesh Kumar. I am a developer.'
+        var html = templateScript(userData);
+
+        // Insert the HTML code into the page
+        $("#winter-courses .add-course").before(html);
+    }
+
+    
+</script>
 
 <script>
 $(document).ready(function() {
