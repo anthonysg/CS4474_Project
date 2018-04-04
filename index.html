@@ -241,6 +241,10 @@
         vertical-align: middle;
     }
 
+    #course-registration .courses {
+        margin-left: 15px;
+    }
+
     #course-registration .courses span {
         margin: 10px 5px;
     }
@@ -264,10 +268,6 @@
 
     #course-registration hr {
         border-top: 1px solid white;
-    }
-
-    #course-registration .courses {
-        margin-left: 10px;
     }
 
     #progress {
@@ -317,6 +317,7 @@
 <head>
     <meta charset="utf-8"/>
     <script src="scripts/jquery-3.3.1.min.js"></script>
+    <script src="scripts/handlebars-v4.0.11.js"></script>
 </head>
 
 <body>
@@ -419,7 +420,28 @@
                 </div>
                 <button class="accordion">Year 1 - 2016/2017</button>
                 <div class="panel">
-                  <p>You shouldn't be here.</p>
+                    <!-- TEMPLATE -->
+                    <script id="handlebars-demo" type="text/x-handlebars-template">
+                       <div>
+                          My name is {{name}}. I am a {{occupation}}.
+                       </div>
+                    </script>
+                    <!-- TEMPLATE COMPILATION -->
+                    <script>
+                        // Retrieve the template data from the HTML (jQuery is used here).
+                        var template = $('#handlebars-demo').html();
+
+                        // Compile the template data into a function
+                        var templateScript = Handlebars.compile(template);
+
+                        var context = { "name" : "Paul Bartlett", "occupation" : "bad developer" };
+
+                        // html = 'My name is Ritesh Kumar. I am a developer.'
+                        var html = templateScript(context);
+
+                        // Insert the HTML code into the page
+                        $(".courses").append(html);
+                        </script>
                 </div>
             </div>
             <!-- MODAL -->
