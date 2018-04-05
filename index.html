@@ -392,18 +392,6 @@
                     <span class="semester">Fall Semester</span>
                     <hr>
                     <div class="courses" id="fall-courses">
-                        <!-- TEMPLATE -->
-                        <script id="handlebars-demo" type="text/x-handlebars-template">
-                            {{#each this}}
-                                <img class="semester-icon" src="{{ courseImage }}">
-                                <span>{{ courseID }} - {{ courseName }}</span>
-                                <hr>
-                            {{/each}}
-                        </script>
-                        <div class="add-course">
-                            <img class="semester-icon" src="images/icon-purple-plus-20.png">
-                            <span>Add course</span>
-                        </div>
                     </div>
                     <br>
                     <!-- WINTER -->
@@ -411,10 +399,6 @@
                     <span class="semester">Winter Semester</span>
                     <hr>
                     <div class="courses" id="winter-courses">
-                        <div class="add-course">
-                            <img class="semester-icon" src="images/icon-purple-plus-20.png">
-                            <span>Add course</span>
-                        </div>
                     </div>
                 </div>
                 <button class="accordion">Year 1 - 2016/2017</button>
@@ -425,18 +409,18 @@
             <!-- MODAL -->
             <div id="course-modal" class="modal">
               <!-- Modal content -->
-              <div class="modal-content">
-                <span class="close">&times;</span>
-                <p id="modal-title">Add Course</p>
-                <img class="modal-icon" src="images/icon-search-20.png">
-                <input type="text" placeholder="Search courses">
-                <hr>
-                <div id="modal-results">
-                    <img class="modal-img" src="images/icon-search-20.png">
-                    <p id="modal-search">Nothing has been searched yet!</p>
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p id="modal-title">Add Course</p>
+                    <img class="modal-icon" src="images/icon-search-20.png">
+                    <input type="text" placeholder="Search courses">
+                    <hr>
+                    <div id="modal-results">
+                        <img class="modal-img" src="images/icon-search-20.png">
+                        <p id="modal-search">Nothing has been searched yet!</p>
+                    </div>
+                    <button id="modal-button">Add course</button>
                 </div>
-                <button id="modal-button">Add course</button>
-              </div>
             </div>
         </div>
         <div id="c3">
@@ -444,6 +428,39 @@
     </div>
 </body>
 </html>
+
+<!-- TEMPLATE -->
+<script id="courses" type="text/x-handlebars-template">
+    <button class="accordion">Year {{programYear}} - {{year}})</button>
+    <div class="panel">
+        <!-- FALL -->
+        <img class="semester-icon" src="images/icon-fall-30.png">
+        <span class="semester">Fall Semester</span>
+        <hr>
+        <div class="courses" id="fall-courses">
+        </div>
+        <br>
+        <!-- WINTER -->
+        <img class="semester-icon" src="images/icon-winter-30.png">
+        <span class="semester">Winter Semester</span>
+        <hr>
+        <div class="courses" id="winter-courses">
+        </div>
+    </div>
+</script>
+
+<!-- TEMPLATE -->
+<script id="course-partial" type="text/x-handlebars-template">
+    {{#each this}}
+        <img class="semester-icon" src="{{ courseImage }}">
+        <span>{{ courseID }} - {{ courseName }}</span>
+        <hr>
+    {{/each}}
+    <div class="add-course">
+        <img class="semester-icon" src="images/icon-purple-plus-20.png">
+        <span>Add course</span>
+    </div>
+</script>
 
 <script>
 
@@ -462,18 +479,14 @@
     function userCallback(data) {
         userData = data;
 
-        // Retrieve the template data from the HTML (jQuery is used here).
-        var template = $('#handlebars-demo').html();
+        var template = Handlebars.compile($('#course-partial').html());
 
-        // Compile the template data into a function
-        var templateScript = Handlebars.compile(template);
-
-        var fallHTML = templateScript(userData.semesters[0].fall);
-        var winterHTML = templateScript(userData.semesters[1].winter);
+        var fallHTML = template(userData.semesters[0].fall);
+        var winterHTML = template(userData.semesters[1].winter);
 
         // Insert the HTML code into the page
-        $("#fall-courses .add-course").before(fallHTML);
-        $("#winter-courses .add-course").before(winterHTML);
+        $("#fall-courses").append(fallHTML);
+        $("#winter-courses").append(winterHTML);
     }
 
 $(document).ready(function() {

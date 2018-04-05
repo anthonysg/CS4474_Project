@@ -1,29 +1,29 @@
 { 
 	"semesters": [{
 		"fall": [{
-			"year": "4",
+			"programYear": "4",
 			"courseID": "CS2208A", 
 			"courseName": "Computer Archictecture",
 			"courseImage": "images/icon-workstation-20.png"
 		}, {
-			"year": "4",
+			"programYear": "4",
 			"courseID": "CS2210A", 
 			"courseName": "Data Structures and Algorithms",
 			"courseImage": "images/icon-workstation-20.png"
 		}, {
-			"year": "4",
+			"programYear": "4",
 			"courseID": "GEO2060A", 
 			"courseName": "World Cities",
 			"courseImage": "images/icon-world-20.png"
 		}]
 	}, {
 		"winter": [{
-			"year": "4",
+			"programYear": "4",
 			"courseID": "CS4411B", 
 			"courseName": "Databases II",
 			"courseImage": "images/icon-workstation-20.png"
 		}, {
-			"year": "4",
+			"programYear": "4",
 			"courseID": "CS4481B", 
 			"courseName": "Image Compression",
 			"courseImage": "images/icon-workstation-20.png"
