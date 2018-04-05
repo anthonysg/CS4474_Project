@@ -430,14 +430,15 @@
 </html>
 
 <!-- TEMPLATE -->
-<script id="courses" type="text/x-handlebars-template">
-    <button class="accordion">Year {{programYear}} - {{year}})</button>
+<script id="course-year" type="text/x-handlebars-template">
+    <button class="accordion">Year {{programYear}} - {{year}}</button>
     <div class="panel">
         <!-- FALL -->
         <img class="semester-icon" src="images/icon-fall-30.png">
         <span class="semester">Fall Semester</span>
         <hr>
         <div class="courses" id="fall-courses">
+            
         </div>
         <br>
         <!-- WINTER -->
@@ -445,6 +446,7 @@
         <span class="semester">Winter Semester</span>
         <hr>
         <div class="courses" id="winter-courses">
+            
         </div>
     </div>
 </script>
@@ -452,8 +454,8 @@
 <!-- TEMPLATE -->
 <script id="course-partial" type="text/x-handlebars-template">
     {{#each this}}
-        <img class="semester-icon" src="{{ courseImage }}">
-        <span>{{ courseID }} - {{ courseName }}</span>
+        <img class="semester-icon" src="{{courseImage}}">
+        <span>{{courseID}} - {{courseName}}</span>
         <hr>
     {{/each}}
     <div class="add-course">
@@ -472,6 +474,7 @@
       }
     });
 
+$(document).ready(function() {
     var userData;
 
     $.getJSON("data/user.json", userCallback);
@@ -479,17 +482,36 @@
     function userCallback(data) {
         userData = data;
 
-        var template = Handlebars.compile($('#course-partial').html());
+        var template = Handlebars.compile($('#course-year').html());
+        //Handlebars.registerPartial("course", ($('#course-partial')));
 
-        var fallHTML = template(userData.semesters[0].fall);
-        var winterHTML = template(userData.semesters[1].winter);
+        var courseHTML = template(userData.semesters[0].fall[0]);
+        //var winterHTML = template(userData.semesters[1].winter);
 
         // Insert the HTML code into the page
-        $("#fall-courses").append(fallHTML);
-        $("#winter-courses").append(winterHTML);
+        $("#course-registration").append(courseHTML);
+        //$("#winter-courses").append(winterHTML);
+
+        // Accordian
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight){
+              panel.style.maxHeight = null;
+            } else {
+              panel.style.maxHeight = panel.scrollHeight + "px";
+            } 
+          });
+        }
+
+        // Click first course accordion to open for user
+        $(".accordion").first().click();
     }
 
-$(document).ready(function() {
     // Toggle between hiding and showing the dropdown content
     $(".dropbtn").click(function(e) {
         e.stopPropagation();
@@ -502,8 +524,7 @@ $(document).ready(function() {
         $(".dropdown-content").removeClass("show");
     });
 
-    // Click first course accordion to open for user
-    $(".accordion").first().click();
+
 
     /* Modal click events */
     // Displays Modal on add course click
@@ -521,22 +542,6 @@ $(document).ready(function() {
 
     });
 });
-
-// Accordian
-var acc = document.getElementsByClassName("accordion");
-var i;
-
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight){
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
-    } 
-  });
-}
 
 // Modal
 var modal = document.getElementById('course-modal');

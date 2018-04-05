@@ -1,6 +1,7 @@
 { 
 	"semesters": [{
 		"fall": [{
+			"year": "2017/2018",
 			"programYear": "4",
 			"courseID": "CS2208A", 
 			"courseName": "Computer Archictecture",
