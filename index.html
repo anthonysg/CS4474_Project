@@ -424,13 +424,15 @@
                 {{#each semester.fall}}
                     {{> course}}
                 {{/each}}
+                {{#if @first}}
+                    {{#checklength semester.fall 5}}
+                        <div class="add-course">
+                            <img class="semester-icon" src="images/icon-purple-plus-20.png">
+                            <span>Add course</span>
+                        </div>
+                    {{/checklength}}
+                {{/if}}
             </div>
-            {{#if @first}}
-                <div class="add-course">
-                    <img class="semester-icon" src="images/icon-purple-plus-20.png">
-                    <span>Add course</span>
-                </div>
-            {{/if}}
             <br>
             <!-- WINTER -->
             <img class="semester-icon" src="images/icon-winter-30.png">
@@ -440,13 +442,15 @@
                 {{#each semester.winter}}
                     {{> course}}
                 {{/each}}
+                {{#if @first}}
+                    {{#checklength semester.winter 5}}
+                        <div class="add-course">
+                            <img class="semester-icon" src="images/icon-purple-plus-20.png">
+                            <span>Add course</span>
+                        </div>
+                    {{/checklength}}
+                {{/if}}
             </div>
-            {{#if @first}}
-                <div class="add-course">
-                    <img class="semester-icon" src="images/icon-purple-plus-20.png">
-                    <span>Add course</span>
-                </div>
-            {{/if}}
         </div>
     {{/each}}
 </script>
@@ -472,6 +476,14 @@
         var userData;
 
         $.getJSON("data/user.json", userCallback);
+
+        Handlebars.registerHelper('checklength', function (v1, v2, options) {
+            'use strict';
+            if (v1.length<v2) {
+                return options.fn(this);
+            }
+            return options.inverse(this);
+        });
 
         function userCallback(data) {
             userData = data;
