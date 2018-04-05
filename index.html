@@ -267,6 +267,12 @@
         vertical-align: middle;
     }
 
+    #course-registration .remove-course {
+        margin: 4px;
+        cursor: pointer;
+        float: right;
+    }
+
     #course-registration hr {
         border-top: 1px solid white;
     }
@@ -457,9 +463,11 @@
 
 <!-- TEMPLATE -->
 <script id="course-partial" type="text/x-handlebars-template">
-    <img class="semester-icon" src="{{courseImage}}">
-    <span>{{course}}</span>
-    <hr>
+    <div class="course">
+        <img class="semester-icon" src="{{courseImage}}">
+        <span>{{course}}</span>
+        <hr>
+    </div>
 </script>
 
 <script>
@@ -485,18 +493,41 @@
             return options.inverse(this);
         });
 
+        // Modal
+        var modal = document.getElementById('course-modal');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Toggle between hiding and showing the dropdown content
+        $(".dropbtn").click(function(e) {
+            e.stopPropagation();
+            $(this).parent().siblings().find(".dropdown-content").removeClass("show"); // hide other menus
+            $(this).find(".dropdown-content").toggleClass("show");
+        });
+
+        // Close the dropdown if the user clicks outside of it
+        $("body").click(function() {
+            $(".dropdown-content").removeClass("show");
+        });
+
         function userCallback(data) {
             userData = data;
 
+            // Compile template
             var template = Handlebars.compile($('#course-year').html());
             Handlebars.registerPartial("course", $('#course-partial').html());
 
+            // Render template
             var courseHTML = template(userData);
-            //var winterHTML = template(userData.semesters[1].winter);
-
-            // Insert the HTML code into the page
             $("#course-registration").append(courseHTML);
-            //$("#winter-courses").append(winterHTML);
+
+            // Append x for removing course to the current year
+            $(".panel").first().find(".course").prepend('<img class="remove-course" src="images/icon-delete-15.png">');
 
             // Accordian
             var acc = document.getElementsByClassName("accordion");
@@ -517,11 +548,15 @@
             // Click first course accordion to open for user
             $(".accordion").first().click();
 
-            /* Modal click events */
             // Displays Modal on add course click
             $(".add-course").click(function() {
                 $("#course-modal").css("display", "block");
             });
+
+            // Removes course when pressed
+            $(".remove-course").click(function() {
+                $(this).parent().empty();
+            })
 
             // Hides model on (x) click
             $(".close").click(function() {
@@ -533,27 +568,5 @@
 
             });
         }
-
-        // Toggle between hiding and showing the dropdown content
-        $(".dropbtn").click(function(e) {
-            e.stopPropagation();
-            $(this).parent().siblings().find(".dropdown-content").removeClass("show"); // hide other menus
-            $(this).find(".dropdown-content").toggleClass("show");
-        });
-
-        // Close the dropdown if the user clicks outside of it
-        $("body").click(function() {
-            $(".dropdown-content").removeClass("show");
-        });
     });
-
-    // Modal
-    var modal = document.getElementById('course-modal');
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    } 
 </script>
