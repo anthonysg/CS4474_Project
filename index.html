@@ -27,6 +27,10 @@
         content: "\25B2";
     }
 
+    .hidden {
+        display: none;
+    }
+
     .modal {
         display: none; 
         position: fixed;
@@ -268,6 +272,11 @@
     }
 
     #course-registration .remove-course {
+        display: none;
+    }
+
+    #course-registration .panel:first-of-type .remove-course {
+        display: block;
         margin: 4px;
         cursor: pointer;
         float: right;
@@ -431,12 +440,10 @@
                     {{> course}}
                 {{/each}}
                 {{#if @first}}
-                    {{#checklength semester.fall 5}}
-                        <div class="add-course">
-                            <img class="semester-icon" src="images/icon-purple-plus-20.png">
-                            <span>Add course</span>
-                        </div>
-                    {{/checklength}}
+                    <div class="add-course{{#checklength semester.fall 4}} hidden{{/checklength}}">
+                        <img class="semester-icon" src="images/icon-purple-plus-20.png">
+                        <span>Add course</span>
+                    </div>
                 {{/if}}
             </div>
             <br>
@@ -449,12 +456,10 @@
                     {{> course}}
                 {{/each}}
                 {{#if @first}}
-                    {{#checklength semester.winter 5}}
-                        <div class="add-course">
-                            <img class="semester-icon" src="images/icon-purple-plus-20.png">
-                            <span>Add course</span>
-                        </div>
-                    {{/checklength}}
+                    <div class="add-course{{#checklength semester.winter 4}} hidden{{/checklength}}">
+                        <img class="semester-icon" src="images/icon-purple-plus-20.png">
+                        <span>Add course</span>
+                    </div>
                 {{/if}}
             </div>
         </div>
@@ -466,6 +471,7 @@
     <div class="course">
         <img class="semester-icon" src="{{courseImage}}">
         <span>{{course}}</span>
+        <img class="remove-course" src="images/icon-delete-15.png">
         <hr>
     </div>
 </script>
@@ -481,13 +487,13 @@
     });
 
     $(document).ready(function() {
-        var userData;
+        var userData, addLocation;
 
         $.getJSON("data/user.json", userCallback);
 
         Handlebars.registerHelper('checklength', function (v1, v2, options) {
             'use strict';
-            if (v1.length<v2) {
+            if (v1.length>v2) {
                 return options.fn(this);
             }
             return options.inverse(this);
@@ -515,6 +521,7 @@
             $(".dropdown-content").removeClass("show");
         });
 
+        // Things to do after getting user data
         function userCallback(data) {
             userData = data;
 
@@ -526,8 +533,7 @@
             var courseHTML = template(userData);
             $("#course-registration").append(courseHTML);
 
-            // Append x for removing course to the current year
-            $(".panel").first().find(".course").prepend('<img class="remove-course" src="images/icon-delete-15.png">');
+            Handlebars.unregisterPartial("course");
 
             // Accordian
             var acc = document.getElementsByClassName("accordion");
@@ -551,12 +557,14 @@
             // Displays Modal on add course click
             $(".add-course").click(function() {
                 $("#course-modal").css("display", "block");
+                addLocation = $(this);
             });
 
             // Removes course when pressed
             $(".remove-course").click(function() {
-                $(this).parent().empty();
-            })
+                $(this).closest(".courses").find(".add-course").removeClass("hidden")
+                $(this).parent().remove();
+            });
 
             // Hides model on (x) click
             $(".close").click(function() {
@@ -565,7 +573,14 @@
 
             // Add course button
             $("#modal-button").click(function(){
-
+                var courseTemplate = Handlebars.compile($('#course-partial').html());
+                var addCourse = courseTemplate(userData.semesters[0].semester.fall[0]);
+                $(addLocation).before(addCourse);
+                $(addLocation).prev().find(".remove-course").click(function() {
+                    $(this).closest(".courses").find(".add-course").removeClass("hidden")
+                    $(this).parent().remove();
+                });
+                $("#course-modal").css("display", "none");
             });
         }
     });
