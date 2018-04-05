@@ -193,7 +193,8 @@
 
     #wrapper {
         display: flex;
-        height: 100%;
+        min-height: 95vh;
+        height: auto;
     }
 
     #wrapper > div {
@@ -385,26 +386,7 @@
         <div id="c2">
             <div id="course-registration">
                 <p class="title">Course Registration</p>
-                <button class="accordion">Year 2 - 2017/2018</button>
-                <div class="panel">
-                    <!-- FALL -->
-                    <img class="semester-icon" src="images/icon-fall-30.png">
-                    <span class="semester">Fall Semester</span>
-                    <hr>
-                    <div class="courses" id="fall-courses">
-                    </div>
-                    <br>
-                    <!-- WINTER -->
-                    <img class="semester-icon" src="images/icon-winter-30.png">
-                    <span class="semester">Winter Semester</span>
-                    <hr>
-                    <div class="courses" id="winter-courses">
-                    </div>
-                </div>
-                <button class="accordion">Year 1 - 2016/2017</button>
-                <div class="panel">
-                    
-                </div>
+                <!-- COURSE TEMPLATE -->
             </div>
             <!-- MODAL -->
             <div id="course-modal" class="modal">
@@ -431,37 +413,49 @@
 
 <!-- TEMPLATE -->
 <script id="course-year" type="text/x-handlebars-template">
-    <button class="accordion">Year {{programYear}} - {{year}}</button>
-    <div class="panel">
-        <!-- FALL -->
-        <img class="semester-icon" src="images/icon-fall-30.png">
-        <span class="semester">Fall Semester</span>
-        <hr>
-        <div class="courses" id="fall-courses">
-            
+    {{#each semesters}}
+        <button class="accordion">Year {{programYear}} - {{year}}</button>
+        <div class="panel">
+            <!-- FALL -->
+            <img class="semester-icon" src="images/icon-fall-30.png">
+            <span class="semester">Fall Semester</span>
+            <hr>
+            <div class="courses" id="fall-courses">
+                {{#each semester.fall}}
+                    {{> course}}
+                {{/each}}
+            </div>
+            {{#if @first}}
+                <div class="add-course">
+                    <img class="semester-icon" src="images/icon-purple-plus-20.png">
+                    <span>Add course</span>
+                </div>
+            {{/if}}
+            <br>
+            <!-- WINTER -->
+            <img class="semester-icon" src="images/icon-winter-30.png">
+            <span class="semester">Winter Semester</span>
+            <hr>
+            <div class="courses" id="winter-courses">
+                {{#each semester.winter}}
+                    {{> course}}
+                {{/each}}
+            </div>
+            {{#if @first}}
+                <div class="add-course">
+                    <img class="semester-icon" src="images/icon-purple-plus-20.png">
+                    <span>Add course</span>
+                </div>
+            {{/if}}
         </div>
-        <br>
-        <!-- WINTER -->
-        <img class="semester-icon" src="images/icon-winter-30.png">
-        <span class="semester">Winter Semester</span>
-        <hr>
-        <div class="courses" id="winter-courses">
-            
-        </div>
-    </div>
+    {{/each}}
 </script>
 
 <!-- TEMPLATE -->
 <script id="course-partial" type="text/x-handlebars-template">
-    {{#each this}}
-        <img class="semester-icon" src="{{courseImage}}">
-        <span>{{courseID}} - {{courseName}}</span>
-        <hr>
-    {{/each}}
-    <div class="add-course">
-        <img class="semester-icon" src="images/icon-purple-plus-20.png">
-        <span>Add course</span>
-    </div>
+    <img class="semester-icon" src="{{courseImage}}">
+    <span>{{course}}</span>
+    <hr>
 </script>
 
 <script>
@@ -474,82 +468,80 @@
       }
     });
 
-$(document).ready(function() {
-    var userData;
+    $(document).ready(function() {
+        var userData;
 
-    $.getJSON("data/user.json", userCallback);
+        $.getJSON("data/user.json", userCallback);
 
-    function userCallback(data) {
-        userData = data;
+        function userCallback(data) {
+            userData = data;
 
-        var template = Handlebars.compile($('#course-year').html());
-        //Handlebars.registerPartial("course", ($('#course-partial')));
+            var template = Handlebars.compile($('#course-year').html());
+            Handlebars.registerPartial("course", $('#course-partial').html());
 
-        var courseHTML = template(userData.semesters[0].fall[0]);
-        //var winterHTML = template(userData.semesters[1].winter);
+            var courseHTML = template(userData);
+            //var winterHTML = template(userData.semesters[1].winter);
 
-        // Insert the HTML code into the page
-        $("#course-registration").append(courseHTML);
-        //$("#winter-courses").append(winterHTML);
+            // Insert the HTML code into the page
+            $("#course-registration").append(courseHTML);
+            //$("#winter-courses").append(winterHTML);
 
-        // Accordian
-        var acc = document.getElementsByClassName("accordion");
-        var i;
+            // Accordian
+            var acc = document.getElementsByClassName("accordion");
+            var i;
 
-        for (i = 0; i < acc.length; i++) {
-          acc[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.maxHeight){
-              panel.style.maxHeight = null;
-            } else {
-              panel.style.maxHeight = panel.scrollHeight + "px";
-            } 
-          });
+            for (i = 0; i < acc.length; i++) {
+              acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight){
+                  panel.style.maxHeight = null;
+                } else {
+                  panel.style.maxHeight = panel.scrollHeight + "px";
+                } 
+              });
+            }
+
+            // Click first course accordion to open for user
+            $(".accordion").first().click();
+
+            /* Modal click events */
+            // Displays Modal on add course click
+            $(".add-course").click(function() {
+                $("#course-modal").css("display", "block");
+            });
+
+            // Hides model on (x) click
+            $(".close").click(function() {
+                $("#course-modal").css("display", "none");
+            });
+
+            // Add course button
+            $("#modal-button").click(function(){
+
+            });
         }
 
-        // Click first course accordion to open for user
-        $(".accordion").first().click();
-    }
+        // Toggle between hiding and showing the dropdown content
+        $(".dropbtn").click(function(e) {
+            e.stopPropagation();
+            $(this).parent().siblings().find(".dropdown-content").removeClass("show"); // hide other menus
+            $(this).find(".dropdown-content").toggleClass("show");
+        });
 
-    // Toggle between hiding and showing the dropdown content
-    $(".dropbtn").click(function(e) {
-        e.stopPropagation();
-        $(this).parent().siblings().find(".dropdown-content").removeClass("show"); // hide other menus
-        $(this).find(".dropdown-content").toggleClass("show");
+        // Close the dropdown if the user clicks outside of it
+        $("body").click(function() {
+            $(".dropdown-content").removeClass("show");
+        });
     });
 
-    // Close the dropdown if the user clicks outside of it
-    $("body").click(function() {
-        $(".dropdown-content").removeClass("show");
-    });
+    // Modal
+    var modal = document.getElementById('course-modal');
 
-
-
-    /* Modal click events */
-    // Displays Modal on add course click
-    $(".add-course").click(function() {
-        $("#course-modal").css("display", "block");
-    });
-
-    // Hides model on (x) click
-    $(".close").click(function() {
-        $("#course-modal").css("display", "none");
-    });
-
-    // Add course button
-    $("#modal-button").click(function(){
-
-    });
-});
-
-// Modal
-var modal = document.getElementById('course-modal');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-} 
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    } 
 </script>

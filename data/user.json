@@ -1,33 +1,148 @@
 { 
 	"semesters": [{
-		"fall": [{
-			"year": "2017/2018",
-			"programYear": "4",
-			"courseID": "CS2208A", 
-			"courseName": "Computer Archictecture",
-			"courseImage": "images/icon-workstation-20.png"
-		}, {
-			"programYear": "4",
-			"courseID": "CS2210A", 
-			"courseName": "Data Structures and Algorithms",
-			"courseImage": "images/icon-workstation-20.png"
-		}, {
-			"programYear": "4",
-			"courseID": "GEO2060A", 
-			"courseName": "World Cities",
-			"courseImage": "images/icon-world-20.png"
-		}]
+		"year": "2017/2018",
+		"programYear": "4",
+		"semester": { 
+			"fall": [{
+				"course": "COMPSCI 3357A - COMPUTER NETWORKS I",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "COMPSCI 4414A - INTRODUCTION TO DATA SCIENCE I",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "COMPSCI 4470Y - SOFT MAINT AND CON MGMT",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "COMPSCI 4472A - SPEC. TESTING AND QUALITY",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "ENGLISH 1027F - STORYTELLER'S ART I:INTRO TO N",
+				"courseImage": "images/icon-write-20.png"
+			}],
+			"winter": [{
+				"course": "COMPSCI 4411B - DATABASES II",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "COMPSCI 4470Y - SOFT MAINT AND CON MGMT",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "COMPSCI 4474B - HUMAN-COMPUTER INTERACTION",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "COMPSCI 4481B - IMAGE COMPRESSION",
+				"courseImage": "images/icon-workstation-20.png"
+			}]
+		}
 	}, {
-		"winter": [{
-			"programYear": "4",
-			"courseID": "CS4411B", 
-			"courseName": "Databases II",
-			"courseImage": "images/icon-workstation-20.png"
-		}, {
-			"programYear": "4",
-			"courseID": "CS4481B", 
-			"courseName": "Image Compression",
-			"courseImage": "images/icon-workstation-20.png"
-		}]
+		"year": "2016/2017",
+		"programYear": "3",
+		"semester": { 
+			"fall": [{
+				"course": "COMPSCI 3305A - OPERATING SYSTEMS",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "COMPSCI 3307A - OBJCT-ORIENTD DESGN & ANALYSIS",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "COMPSCI 3319A - DATABASES I",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "COMPSCI 3331A - FOUNDATIONS OF COMP SCI I",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "COMPSCI 4435A - SELECTED TOPICS",
+				"courseImage": "images/icon-workstation-20.png"
+			}],
+			"winter": [{
+				"course": "COMPSCI 3340B - ANALYSIS OF ALGORITHMS I",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "COMPSCI 3342B - ORGANIZATN OF PROGRAMMING LANG",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "COMPSCI 3350B - COMPUTER ARCHITECTURE",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "COMPSCI 3377B - SOFTWARE PROJECT MANAGEMENT",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "MUSIC 1122A - FUNDAMENTALS OF MUSIC THEORY",
+				"courseImage": "images/icon-music-20.png"
+			}]
+		}
+	}, {
+		"year": "2015/2016",
+		"programYear": "2",
+		"semester": { 
+			"fall": [{
+				"course": "COMPSCI 2210A - DATA STRUCTURES & ALGORITHMS",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "COMPSCI 2211A - SFTWR TOOLS & SYSTEMS PRGRMING",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "COMPSCI 2214A - DISCRETE STRUCTURES FOR CMP",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "DIGIHUM 2120F - DIGITAL CREATIVITY",
+				"courseImage": "images/icon-light-on-20.png"
+			}, {
+				"course": "GEOGRAPH 2060A - WORLD CITIES",
+				"courseImage": "images/icon-world-20.png"
+			}],
+			"winter": [{
+				"course": "COMPSCI 2208B - COMPUTER ORGANIZATION",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "COMPSCI 2209B - APPLIED LOGIC FOR COMP SCI",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "COMPSCI 2212B - INTRO TO SOFTWARE ENGINEERING",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "PSYCHOL 2030B - THE MALADJUSTED MIND",
+				"courseImage": "images/icon-brain-20.png"
+			}, {
+				"course": "WRITING 2101G - EXPOSITORY WRITING",
+				"courseImage": "images/icon-write-20.png"
+			}]
+		}
+	}, {
+		"year": "2014/2015",
+		"programYear": "1",
+		"semester": { 
+			"fall": [{
+				"course": "CALCULUS 1000A - CALCULUS I",
+				"courseImage": "images/icon-math-20.png"
+			}, {
+				"course": "COMPSCI 1025A - COMP SCI FUNDAMENTALS I",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "COMPSCI 2210A - DATA STRUCTURES AND ALGORITHMS",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "PHYSICS 1301A - INTRODUCTORY PHYSICS I",
+				"courseImage": "images/icon-physics-20.png"
+			}, {
+				"course": "PSYCHOL 1000 - INTRODUCTION TO PSYCHOLOGY",
+				"courseImage": "images/icon-brain-20.png"
+			}],
+			"winter": [{
+				"course": "COMPSCI 1027B - COMP SCI FUNDAMENTALS II",
+				"courseImage": "images/icon-workstation-20.png"
+			}, {
+				"course": "DIGIHUM 1011B - PROGRAMMING MY DIGITAL LIFE",
+				"courseImage": "images/icon-light-on-20.png"
+			}, {
+				"course": "MATH 1600B - LINEAR ALGEBRA I",
+				"courseImage": "images/icon-math-20.png"
+			}, {
+				"course": "PSYCHOL 1000 - INTRODUCTION TO PSYCHOLOGY",
+				"courseImage": "images/icon-brain-20.png"
+			}, {
+				"course": "STATS 1024B - INTRODUCTION TO STATISTICS",
+				"courseImage": "images/icon-chart-20.png"
+			}]
+		}
 	}]	
 }
