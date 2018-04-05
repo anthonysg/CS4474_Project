@@ -392,15 +392,14 @@
                     <span class="semester">Fall Semester</span>
                     <hr>
                     <div class="courses" id="fall-courses">
-                        <img class="semester-icon" src="images/icon-workstation-20.png">
-                        <span>CS2208A - Computer Architecture</span>
-                        <hr>
-                        <img class="semester-icon" src="images/icon-workstation-20.png">
-                        <span>CS2210A - Data Structures and Algorithms</span>
-                        <hr>
-                        <img class="semester-icon" src="images/icon-world-20.png">
-                        <span>GEO2060A - World Cities</span>
-                        <hr>
+                        <!-- TEMPLATE -->
+                        <script id="handlebars-demo" type="text/x-handlebars-template">
+                            {{#each this}}
+                                <img class="semester-icon" src="{{ courseImage }}">
+                                <span>{{ courseID }} - {{ courseName }}</span>
+                                <hr>
+                            {{/each}}
+                        </script>
                         <div class="add-course">
                             <img class="semester-icon" src="images/icon-purple-plus-20.png">
                             <span>Add course</span>
@@ -412,13 +411,6 @@
                     <span class="semester">Winter Semester</span>
                     <hr>
                     <div class="courses" id="winter-courses">
-                        <!-- TEMPLATE -->
-                        <script id="handlebars-demo" type="text/x-handlebars-template">
-                            <img class="semester-icon" src="{{ courseImage }}">
-                            <span>{{ courseID }} - {{ courseName }}</span>
-                            <hr>
-                        </script>
-                        <!-- TEMPLATE COMPILATION -->
                         <div class="add-course">
                             <img class="semester-icon" src="images/icon-purple-plus-20.png">
                             <span>Add course</span>
@@ -455,6 +447,7 @@
 
 <script>
 
+    // Stop mime errors for getting local JSON file
     $.ajaxSetup({beforeSend: function(xhr) {
         if (xhr.overrideMimeType) {
           xhr.overrideMimeType("application/json");
@@ -462,9 +455,9 @@
       }
     });
 
-    $.getJSON("data/user.json", userCallback);
-
     var userData;
+
+    $.getJSON("data/user.json", userCallback);
 
     function userCallback(data) {
         userData = data;
@@ -475,19 +468,14 @@
         // Compile the template data into a function
         var templateScript = Handlebars.compile(template);
 
-
-
-        // html = 'My name is Ritesh Kumar. I am a developer.'
-        var html = templateScript(userData);
+        var fallHTML = templateScript(userData.semesters[0].fall);
+        var winterHTML = templateScript(userData.semesters[1].winter);
 
         // Insert the HTML code into the page
-        $("#winter-courses .add-course").before(html);
+        $("#fall-courses .add-course").before(fallHTML);
+        $("#winter-courses .add-course").before(winterHTML);
     }
 
-    
-</script>
-
-<script>
 $(document).ready(function() {
     // Toggle between hiding and showing the dropdown content
     $(".dropbtn").click(function(e) {
