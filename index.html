@@ -131,8 +131,6 @@
     }
     
     #nav img {
-        display: block;
-        height: 30px;
         padding: 5px;
     }
     
@@ -145,7 +143,6 @@
     }
 
     #nav #options img {
-        height: 20px;
         padding: 10px;
     }
 
@@ -156,6 +153,16 @@
         padding: 0;
         cursor: pointer;
     }
+
+    #nav > button {
+        background: #69409D;
+        border: none;
+        border-radius: 0px 3px 3px 0px;
+        padding: 0px;
+        margin-right: 5px;
+        cursor: pointer;
+    }
+
     #nav .dropdown {
         float: left;
         overflow: hidden;
@@ -184,15 +191,24 @@
     }
 
     #nav input {
+        height: 30px;
         padding: 6px;
-        margin-left: 14%;
-        margin-right: 1%;
-        border-radius: 3px;
+        margin-left: 13.5%;
+        border-radius: 3px 0px 0px 3px;
         border: none;
         flex: 1;
         color: #f9f9f9;
         background-color: #69409D;
+    }
 
+    .ui-autocomplete div {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 14px;
+    }
+
+    .ui-autocomplete .ui-state-active {
+        background: #4F2683 !important;
+        border: 1px solid #69409D !important;
     }
 
     #wrapper {
@@ -375,7 +391,8 @@
                 <img src="images/icon-western.png">
             </a>
         </li>
-        <input type="text" placeholder="Search my courses">
+        <input type="text" id="search-nav" placeholder="Search my courses">
+        <button type="submit"><img src="images/icon-search-white-20.png"></button>  
         <ul id="options">
             <li class="dropdown">
                 <button class="add-course">
@@ -609,6 +626,16 @@
 
             // Click first course accordion to open for user
             $(".accordion").first().click();
+
+            $(function() {
+                var availableTags = [];
+                $('.course').find("span").each(function(){
+                    availableTags.push($(this).text());
+                });
+                $( "#search-nav" ).autocomplete({
+                    source: availableTags.sort()
+                });
+            });
 
             // Displays Modal on add course click
             $(".add-course").click(function() {
