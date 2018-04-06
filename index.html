@@ -487,7 +487,7 @@
     });
 
     $(document).ready(function() {
-        var userData, addLocation;
+        var userData, addLocation, self;
 
         $.getJSON("data/user.json", userCallback);
 
@@ -535,7 +535,7 @@
 
             Handlebars.unregisterPartial("course");
 
-            // Accordian
+            // Accordion
             var acc = document.getElementsByClassName("accordion");
             var i;
 
@@ -546,7 +546,7 @@
                 if (panel.style.maxHeight){
                   panel.style.maxHeight = null;
                 } else {
-                  panel.style.maxHeight = panel.scrollHeight + "px";
+                  panel.style.maxHeight = "515px";
                 } 
               });
             }
@@ -576,10 +576,14 @@
                 var courseTemplate = Handlebars.compile($('#course-partial').html());
                 var addCourse = courseTemplate(userData.semesters[0].semester.fall[0]);
                 $(addLocation).before(addCourse);
-                $(addLocation).prev().find(".remove-course").click(function() {
+                self = $(addLocation).prev();
+                self.find(".remove-course").click(function() {
                     $(this).closest(".courses").find(".add-course").removeClass("hidden")
                     $(this).parent().remove();
                 });
+                if($(addLocation).closest(".courses").find(".course").length >= 5) {
+                    $(self).closest(".courses").find(".add-course").addClass("hidden");
+                }
                 $("#course-modal").css("display", "none");
             });
         }
