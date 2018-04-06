@@ -291,7 +291,7 @@
         float: right;
     }
 
-    #progress div {
+    #progress > div {
         margin: 10px;
         padding: 6px 10px;
         background: grey;
@@ -312,6 +312,14 @@
         margin: 10px 0px;
     }
 
+    #progress #major-progress-text {
+        font-size: 11px;
+    }
+
+    #progress #minor-progress-text {
+        font-size: 10px;
+    }
+
     #progress .progress-icon {
         vertical-align: middle;
     }
@@ -320,6 +328,22 @@
         display: block;
         margin: auto;
         margin-top: 5px;
+    }
+
+    #progress-major #progressbar {
+        height: 8px;
+        border-radius: 5px;
+        margin: 0px 19px;
+    }
+
+    #progress-minor #progressbar {
+        height: 5px;
+        border-radius: 4px;
+        margin: 0px 35px;
+    }
+
+    #progress .ui-progressbar-value {
+        border-radius: 10px;
     }
 
     #progress-home span {
@@ -332,7 +356,9 @@
 <html>
 <head>
     <meta charset="utf-8"/>
+    <link rel="stylesheet" href="style/jquery-ui.min.css">
     <script src="scripts/jquery-3.3.1.min.js"></script>
+    <script src="scripts/jquery-ui.min.js"></script>
     <script src="scripts/handlebars-v4.0.11.js"></script>
 </head>
 
@@ -390,10 +416,14 @@
                 <div id="progress-major">
                     <img class="progress-img" src="images/icon-fall-30.png">
                     <p>Specialization in Computer Science</p>
+                    <div id="progressbar"></div>
+                    <p id="major-progress-text"></p>
                 </div>
                 <div id="progress-minor">
                     <img class="progress-img" src="images/icon-diploma-40.png">
                     <p>Minor in Software Engineering</p>
+                    <div id="progressbar"></div>
+                    <p id="minor-progress-text"></p>
                 </div>
             </div>
         </div>
@@ -486,8 +516,26 @@
       }
     });
 
+    // Progress bar for major
+    function majorProgress() {
+        major = $(".course").length;
+        $("#major-progress-text").text(major/2 + " / 20");
+        $("#progress-major #progressbar").progressbar({
+            value: Math.floor(major * 2.5)
+        });
+    }
+
+    // Progress bar for minor
+    function minorProgress() {
+        minor = $(".panel").first().find(".course").length;
+        $("#minor-progress-text").text(minor/2 + " / 5");
+        $("#progress-minor #progressbar").progressbar({
+            value: minor * 10
+        });
+    }
+
     $(document).ready(function() {
-        var userData, addLocation, self;
+        var userData, addLocation, self, major, minor;
 
         $.getJSON("data/user.json", userCallback);
 
@@ -551,6 +599,9 @@
               });
             }
 
+            majorProgress();
+            minorProgress();
+
             // Click first course accordion to open for user
             $(".accordion").first().click();
 
@@ -562,8 +613,10 @@
 
             // Removes course when pressed
             $(".remove-course").click(function() {
-                $(this).closest(".courses").find(".add-course").removeClass("hidden")
+                $(this).closest(".courses").find(".add-course").removeClass("hidden");
                 $(this).parent().remove();
+                minorProgress();
+                majorProgress();
             });
 
             // Hides model on (x) click
@@ -580,10 +633,14 @@
                 self.find(".remove-course").click(function() {
                     $(this).closest(".courses").find(".add-course").removeClass("hidden")
                     $(this).parent().remove();
+                    minorProgress();
+                    majorProgress();
                 });
                 if($(addLocation).closest(".courses").find(".course").length >= 5) {
                     $(self).closest(".courses").find(".add-course").addClass("hidden");
                 }
+                minorProgress();
+                majorProgress();
                 $("#course-modal").css("display", "none");
             });
         }
