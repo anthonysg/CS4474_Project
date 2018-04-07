@@ -82,6 +82,20 @@
         text-align: center;
     }
 
+    .modal-content #modal-results li {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        margin-right: 25px;
+        padding: 5px;
+        border-radius: 3px;
+        list-style-type: none;
+        cursor: pointer;
+    }
+
+    .modal-content #modal-results li:hover {
+        background: #807F83;
+    }
+
     .modal-content #modal-results #modal-search {
         font-size: 16px;
         color: lightgrey;
@@ -100,6 +114,11 @@
         font-size: 14px;
         font-weight: bold;
         cursor: pointer;
+    }
+
+    #modal-results {
+        height: 164px;
+        overflow-y: auto;
     }
 
     .close {
@@ -204,6 +223,11 @@
     .ui-autocomplete div {
         font-family: Helvetica, Arial, sans-serif;
         font-size: 14px;
+    }
+
+    .ui-state-active {
+        background: #4F2683 !important;
+        border: 0px solid #69409D !important;
     }
 
     .ui-autocomplete .ui-state-active {
@@ -379,7 +403,7 @@
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="style/jquery-ui.min.css">
     <script src="scripts/jquery-3.3.1.min.js"></script>
-    <script src="scripts/jquery-ui.min.js"></script>
+    <script src="scripts/jquery-ui.js"></script>
     <script src="scripts/handlebars-v4.0.11.js"></script>
 </head>
 
@@ -462,7 +486,7 @@
                     <span class="close">&times;</span>
                     <p id="modal-title">Add Course</p>
                     <img class="modal-icon" src="images/icon-search-20.png">
-                    <input type="text" placeholder="Search courses">
+                    <input type="text" id="search-course" placeholder="Search courses">
                     <hr>
                     <div id="modal-results">
                         <img class="modal-img" src="images/img-lighthouse.png">
@@ -557,9 +581,37 @@
     }
 
     $(document).ready(function() {
-        var userData, addLocation, self, major, minor;
+        var userData, courseData, addLocation, self, major, minor;
 
         $.getJSON("data/user.json", userCallback);
+        $.getJSON("data/courses.json", function(data) {
+            courseData = [];
+
+            data.forEach(function(e) {
+                courseData.push(e.course);
+            })
+
+            courseData.sort();
+
+            // Search for courses
+            $("#search-course").autocomplete({
+                search: function(event, ui) {
+                    $('#modal-results').empty();
+                },
+                source: courseData,
+                minLength: 1
+            }).data("uiAutocomplete")._renderItem = function (ul, item) {
+
+                return $('<li/>')
+               .data('item.uiAutocomplete', item)
+               .append(item.value)
+               .appendTo($('#modal-results'));
+            };
+            $(document).on("click", "#modal-results>li", function() {
+                $(this).parent().find("li").removeClass("ui-state-active");
+                $(this).addClass('ui-state-active');
+            });
+        });
 
         Handlebars.registerHelper('checklength', function (v1, v2, options) {
             'use strict';
@@ -627,13 +679,15 @@
             // Click first course accordion to open for user
             $(".accordion").first().click();
 
+            // Search for nav
             $(function() {
                 var availableTags = [];
                 $('.course').find("span").each(function(){
                     availableTags.push($(this).text());
                 });
-                $( "#search-nav" ).autocomplete({
-                    source: availableTags.sort()
+                availableTags.sort();
+                $("#search-nav").autocomplete({
+                    source: availableTags
                 });
             });
 
