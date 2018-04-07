@@ -546,7 +546,7 @@
 <!-- TEMPLATE -->
 <script id="course-partial" type="text/x-handlebars-template">
     <div class="course">
-        <img class="semester-icon" src="{{courseImage}}">
+        <img class="semester-icon" src="{{courseImage course}}">
         <span>{{course}}</span>
         <img class="remove-course" src="images/icon-delete-15.png">
         <hr>
@@ -565,7 +565,7 @@
 
     // Progress bar for major
     function majorProgress() {
-        major = $(".course").length;
+        var major = $(".course").length;
         $("#major-progress-text").text(major/2 + " / 20");
         $("#progress-major #progressbar").progressbar({
             value: Math.floor(major * 2.5)
@@ -574,11 +574,53 @@
 
     // Progress bar for minor
     function minorProgress() {
-        minor = $(".panel").first().find(".course").length;
+        var minor = $(".panel").first().find(".course").length;
         $("#minor-progress-text").text(minor/2 + " / 5");
         $("#progress-minor #progressbar").progressbar({
             value: minor * 10
         });
+    }
+
+    // Check which image to use for courses
+    function courseImage(courseName) {
+        var image;
+        var course = courseName.split(" ", 1);
+        switch(course[0]) {
+            case "COMPSCI":
+                image = "images/icon-workstation-20.png";
+                break;
+            case "ENGLISH":
+                image = "images/icon-write-20.png";
+                break;
+            case "WRITING":
+                image = "images/icon-write-20.png";
+                break;
+            case "MUSIC":
+                image = "images/icon-music-20.png";
+                break;
+            case "DIGIHUM":
+                image = "images/icon-light-on-20.png";
+                break;
+            case "GEOGRAPH":
+                image = "images/icon-world-20.png";
+                break;
+            case "PSYCHOL":
+                image = "images/icon-brain-20.png";
+                break;
+            case "CALCULUS":
+                image = "images/icon-math-20.png";
+                break;
+            case "PHYSICS":
+                image = "images/icon-physics-20.png";
+                break;
+            case "STATS":
+                image = "images/icon-chart-20.png";
+                break;
+            default:
+                image = "images/icon-workstation-20.png"
+        }
+
+        return image;
     }
 
     $(document).ready(function() {
@@ -588,16 +630,17 @@
         $.getJSON("data/courses.json", function(data) {
             courseData = [];
 
-            var clean = [];
+            // Cleans json from duplicates
+            // var clean = [];
 
-            $.each(data, function(index, value) {
-                if($.inArray(value.course, clean) == -1)
-                {
-                    clean.push(value.course);
-                }
-            });
+            // $.each(data, function(index, value) {
+            //     if($.inArray(value.course, clean) == -1)
+            //     {
+            //         clean.push(value.course);
+            //     }
+            // });
 
-            console.log(JSON.stringify(clean));
+            // console.log(JSON.stringify(clean));
 
             data.forEach(function(e) {
                 courseData.push(e.course);
@@ -623,14 +666,6 @@
                 $(this).parent().find("li").removeClass("ui-state-active");
                 $(this).addClass('ui-state-active');
             });
-        });
-
-        Handlebars.registerHelper('checklength', function (v1, v2, options) {
-            'use strict';
-            if (v1.length>v2) {
-                return options.fn(this);
-            }
-            return options.inverse(this);
         });
 
         // Modal
@@ -659,6 +694,18 @@
         function userCallback(data) {
             userData = data;
 
+            Handlebars.registerHelper('checklength', function (v1, v2, options) {
+                'use strict';
+                if (v1.length>v2) {
+                    return options.fn(this);
+                }
+                return options.inverse(this);
+            });
+
+            Handlebars.registerHelper("courseImage", function(course) {
+                return courseImage(course);
+            });
+            
             // Compile template
             var template = Handlebars.compile($('#course-year').html());
             Handlebars.registerPartial("course", $('#course-partial').html());
@@ -725,7 +772,8 @@
             // Add course button
             $("#modal-button").click(function(){
                 var courseTemplate = Handlebars.compile($('#course-partial').html());
-                var addCourse = courseTemplate(userData.semesters[0].semester.fall[0]);
+                var name = $('#modal-results').find('.ui-state-active').text();
+                var addCourse = courseTemplate({course: name});
                 $(addLocation).before(addCourse);
                 self = $(addLocation).prev();
                 self.find(".remove-course").click(function() {
