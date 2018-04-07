@@ -27,6 +27,31 @@
         content: "\25B2";
     }
 
+    .alert {
+        display: none;
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+        opacity: 1;
+        margin-bottom: 15px;
+        border-radius: 3px;
+    }
+
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .closebtn:hover {
+        color: black;
+    }
+
     .hidden {
         display: none;
     }
@@ -542,7 +567,10 @@
                     <input type="text" id="search-course" placeholder="Search courses">
                     <hr>
                     <div id="modal-results">
-
+                    </div>
+                    <div class="alert">
+                        <span class="closebtn">&times;</span>  
+                        <strong>Error</strong>: Semester full
                     </div>
                     <button id="modal-button">Add course</button>
                 </div>
@@ -764,9 +792,11 @@
         window.onclick = function(event) {
             if (event.target == degreeModal) {
                 $(degreeModal).hide();
+                $(".alert").hide();
             }
             if (event.target == courseModal) {
                 $(courseModal).hide();
+                $(".alert").hide();
             }
         } 
 
@@ -780,6 +810,10 @@
         // Close the dropdown if the user clicks outside of it
         $("body").click(function() {
             $(".dropdown-content").removeClass("show");
+        });
+
+        $(".closebtn").click(function() {
+            $(".alert").fadeOut(300);
         });
 
         // Things to do after getting user data
@@ -884,19 +918,34 @@
                 var courseTemplate = Handlebars.compile($('#course-partial').html());
                 var name = $('#modal-results').find('.ui-state-active').text();
                 var addCourse = courseTemplate({course: name});
-                $(addLocation).before(addCourse);
-                self = $(addLocation).prev();
+                if($(addLocation).parent().attr("id") == "all-courses") {
+                    var courseCode = name.split(" ", 2)[1].slice(-1);
+                    if(courseCode == 'A' || courseCode == 'F')
+                        self = $("#fall-courses").find(".add-course");
+                    else
+                        self = $("#winter-courses").find(".add-course");
+                    if($(self).closest(".courses").find(".course").length >= 5) {
+                        $(".alert").fadeIn(300);
+                        return;
+                    }
+                    self.before(addCourse);
+                    self = self.prev();
+                } else {
+                    $(addLocation).before(addCourse);
+                    self = $(addLocation).prev();
+                }
                 self.find(".remove-course").click(function() {
                     $(this).closest(".courses").find(".add-course").removeClass("hidden")
                     $(this).parent().remove();
                     minorProgress();
                     majorProgress();
                 });
-                if($(addLocation).closest(".courses").find(".course").length >= 5) {
+                if($(self).closest(".courses").find(".course").length >= 5) {
                     $(self).closest(".courses").find(".add-course").addClass("hidden");
                 }
                 minorProgress();
                 majorProgress();
+                $(".alert").fadeOut(300);
                 $("#course-modal").hide();
             });
         }
