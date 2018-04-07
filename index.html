@@ -72,6 +72,12 @@
         vertical-align: middle;
     }
 
+    .modal-content #modal-results {
+        height: 210px;
+        overflow-y: auto;
+        margin-bottom: 10px;
+    }
+
     .modal-content #modal-results .modal-img {
         display: block;
         margin: auto;
@@ -114,11 +120,6 @@
         font-size: 14px;
         font-weight: bold;
         cursor: pointer;
-    }
-
-    #modal-results {
-        height: 164px;
-        overflow-y: auto;
     }
 
     .close {
@@ -586,6 +587,17 @@
         $.getJSON("data/user.json", userCallback);
         $.getJSON("data/courses.json", function(data) {
             courseData = [];
+
+            var clean = [];
+
+            $.each(data, function(index, value) {
+                if($.inArray(value.course, clean) == -1)
+                {
+                    clean.push(value.course);
+                }
+            });
+
+            console.log(JSON.stringify(clean));
 
             data.forEach(function(e) {
                 courseData.push(e.course);
