@@ -483,7 +483,7 @@
         <input type="text" id="search-nav" placeholder="Search my courses">
         <button type="submit"><img src="images/icon-search-white-20.png"></button>  
         <ul id="options">
-            <li class="dropdown">
+            <li id="all-courses" class="dropdown">
                 <button class="add-course">
                     <img src="images/icon-plus-20.png">
                 </button>
@@ -631,6 +631,7 @@
 </script>
 
 <script>
+    var userData, courseData, fallData, winterData, addLocation, self, major, minor;
 
     // Stop mime errors for getting local JSON file
     $.ajaxSetup({beforeSend: function(xhr) {
@@ -696,16 +697,37 @@
             default:
                 image = "images/icon-workstation-20.png"
         }
-
         return image;
     }
 
+    // Change the dataset used for autocompletion
+    function courseAutocomplete(data) {
+        // Search for courses
+        $("#search-course").autocomplete({
+            search: function(event, ui) {
+                $('#modal-results').empty();
+            },
+            source: data,
+            minLength: 1
+        }).data("uiAutocomplete")._renderItem = function (ul, item) {
+
+            return $('<li/>')
+           .data('item.uiAutocomplete', item)
+           .append(item.value)
+           .appendTo($('#modal-results'));
+        };
+        $(document).on("click", "#modal-results>li", function() {
+            $(this).parent().find("li").removeClass("ui-state-active");
+            $(this).addClass('ui-state-active');
+        });
+    }
+
     $(document).ready(function() {
-        var userData, courseData, addLocation, self, major, minor;
 
         $.getJSON("data/user.json", userCallback);
         $.getJSON("data/courses.json", function(data) {
-            courseData = [];
+            fallData = [];
+            winterData = [];
 
             // Cleans json from duplicates
             // var clean = [];
@@ -719,39 +741,35 @@
 
             // console.log(JSON.stringify(clean));
 
-            data.forEach(function(e) {
-                courseData.push(e.course);
-            })
+            data.fall.forEach(function(e) {
+                fallData.push(e.course);
+            });
 
+            data.winter.forEach(function(e) {
+                winterData.push(e.course);
+            });
+
+            fallData.sort();
+            winterData.sort();
+
+            courseData = fallData.concat(winterData);
             courseData.sort();
 
-            // Search for courses
-            $("#search-course").autocomplete({
-                search: function(event, ui) {
-                    $('#modal-results').empty();
-                },
-                source: courseData,
-                minLength: 1
-            }).data("uiAutocomplete")._renderItem = function (ul, item) {
-
-                return $('<li/>')
-               .data('item.uiAutocomplete', item)
-               .append(item.value)
-               .appendTo($('#modal-results'));
-            };
-            $(document).on("click", "#modal-results>li", function() {
-                $(this).parent().find("li").removeClass("ui-state-active");
-                $(this).addClass('ui-state-active');
-            });
+            
         });
 
+        var degreeModal = document.getElementById('degree-modal');
+        var courseModal = document.getElementById('course-modal');
+
         // When the user clicks anywhere outside of the modal, close it
-        $('.modal').click(function(){
-            $('.modal').hide(); 
-        });                                    
-        $('.modal-content').click(function(e){
-            e.stopPropagation();
-        }); 
+        window.onclick = function(event) {
+            if (event.target == degreeModal) {
+                $(degreeModal).hide();
+            }
+            if (event.target == courseModal) {
+                $(courseModal).hide();
+            }
+        } 
 
         // Toggle between hiding and showing the dropdown content
         $(".dropbtn").click(function(e) {
@@ -827,6 +845,14 @@
 
             // Displays Modal on add course click
             $(".add-course").click(function() {
+                var semester = $(this).parent().attr('id');
+                if(semester == "fall-courses") {
+                    courseAutocomplete(fallData);
+                } else if(semester == "winter-courses") {
+                    courseAutocomplete(winterData);
+                } else if(semester == "all-courses") {
+                    courseAutocomplete(courseData);
+                }
                 $("#course-modal").show();
                 addLocation = $(this);
             });
