@@ -542,8 +542,7 @@
                     <input type="text" id="search-course" placeholder="Search courses">
                     <hr>
                     <div id="modal-results">
-                        <img class="modal-img" src="images/img-lighthouse.png">
-                        <p id="modal-search">Nothing has been searched yet!</p>
+
                     </div>
                     <button id="modal-button">Add course</button>
                 </div>
@@ -845,6 +844,9 @@
 
             // Displays Modal on add course click
             $(".add-course").click(function() {
+                $('#modal-results').empty();
+                $('#modal-results').append('<img class="modal-img" src="images/img-lighthouse.png"><p id="modal-search">Nothing has been searched yet!</p>');
+                $("#search-course").val("");
                 var semester = $(this).parent().attr('id');
                 if(semester == "fall-courses") {
                     courseAutocomplete(fallData);
@@ -854,6 +856,7 @@
                     courseAutocomplete(courseData);
                 }
                 $("#course-modal").show();
+                $("#search-course").focus()
                 addLocation = $(this);
             });
 
