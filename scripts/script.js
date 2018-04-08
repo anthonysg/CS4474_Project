@@ -1,13 +1,4 @@
-
 var userData, courseData, fallData, winterData, addLocation, self, major, minor;
-
-// Stop mime errors for getting local JSON file
-$.ajaxSetup({beforeSend: function(xhr) {
-    if (xhr.overrideMimeType) {
-      xhr.overrideMimeType("application/json");
-    }
-  }
-});
 
 // Progress bar for major
 function majorProgress() {
@@ -96,65 +87,48 @@ function alertText(html) {
     $('.alert-text').append(html);
 }
 
-(function getTemplateAjax(path) {
-    var source;
-    var template;
-
-    $.ajax({
-        url: path, //ex. js/templates/mytemplate.handlebars
-        cache: true,
-        success: function(data) {
-            source    = data;
-            template  = Handlebars.compile(source);
-            $('#target').html(template);
-        }               
-    });         
-})()
-
 $(document).ready(function() {
 
     // Retrieve the object from storage
     var savedUser = localStorage.getItem('userData');
-    
+
+    fallData = [];
+    winterData = [];
+
+    // Cleans json from duplicates
+    // var clean = [];
+
+    // $.each(data, function(index, value) {
+    //     if($.inArray(value.course, clean) == -1)
+    //     {
+    //         clean.push(value.course);
+    //     }
+    // });
+
+    // console.log(JSON.stringify(clean));
+
+    jsonCourses = JSON.parse(jsonCourses);
+
+    jsonCourses.fall.forEach(function(e) {
+        fallData.push(e.course);
+    });
+
+    jsonCourses.winter.forEach(function(e) {
+        winterData.push(e.course);
+    });
+
+    fallData.sort();
+    winterData.sort();
+
+    courseData = fallData.concat(winterData);
+    courseData.sort();
+
     // Get json from file if not in local storage
     if(savedUser == null) {
-        $.getJSON("data/user.json", userCallback);
+        userCallback(JSON.parse(jsonUser));
     } else {
         userCallback(JSON.parse(savedUser));
     }
-
-    $.getJSON("data/courses.json", function(data) {
-        fallData = [];
-        winterData = [];
-
-        // Cleans json from duplicates
-        // var clean = [];
-
-        // $.each(data, function(index, value) {
-        //     if($.inArray(value.course, clean) == -1)
-        //     {
-        //         clean.push(value.course);
-        //     }
-        // });
-
-        // console.log(JSON.stringify(clean));
-
-        data.fall.forEach(function(e) {
-            fallData.push(e.course);
-        });
-
-        data.winter.forEach(function(e) {
-            winterData.push(e.course);
-        });
-
-        fallData.sort();
-        winterData.sort();
-
-        courseData = fallData.concat(winterData);
-        courseData.sort();
-
-        
-    });
 
     var degreeModal = document.getElementById('degree-modal');
     var courseModal = document.getElementById('course-modal');

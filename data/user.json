@@ -1,4 +1,4 @@
-{ 
+jsonUser = `{ 
 	"semesters": [{
 		"year": "2017/2018",
 		"programYear": "4",
@@ -12,7 +12,7 @@
 			}, {
 				"course": "COMPSCI 4472A - SPEC. TESTING AND QUALITY"
 			}, {
-				"course": "ENGLISH 1027F - STORYTELLER'S ART I:INTRO TO N"
+				"course": "ENGLISH 1027F - STORYTELLER&#39;S ART I:INTRO TO N"
 			}],
 			"winter": [{
 				"course": "COMPSCI 4411B - DATABASES II"
@@ -106,4 +106,4 @@
 			}]
 		}
 	}]	
-}
+}`
