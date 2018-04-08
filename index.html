@@ -980,6 +980,7 @@
                         }
                         return;
                     }
+                    // add here
                     self.before(addCourse);
                     self = self.prev();
                 } else {
@@ -1011,6 +1012,15 @@
                 });
                 if($(self).closest(".courses").find(".course").length >= 5) {
                     $(self).closest(".courses").find(".add-course").addClass("hidden");
+                }
+                var semester = self.parent().attr("id");
+                var course = self.find("span").text();
+                if(semester == "fall-courses") {
+                    userData.semesters[0].semester.fall.push({"course": course});
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                } else if(semester == "winter-courses") {
+                    userData.semesters[0].semester.winter.push({"course": course});
+                    localStorage.setItem('userData', JSON.stringify(userData));
                 }
                 minorProgress();
                 majorProgress();
