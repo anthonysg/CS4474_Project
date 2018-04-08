@@ -1,0 +1,39 @@
+<!-- TEMPLATE -->
+<script id="course-year" type="text/x-handlebars-template">
+    {{#each semesters}}
+        <button class="accordion">Year {{programYear}} - {{year}}</button>
+        <div class="panel">
+            <!-- FALL -->
+            <img class="semester-icon" src="images/icon-fall-30.png">
+            <span class="semester">Fall Semester</span>
+            <hr>
+            <div class="courses" id="fall-courses">
+                {{#each semester.fall}}
+                    {{> course}}
+                {{/each}}
+                {{#if @first}}
+                    <div class="add-course{{#checklength semester.fall 4}} hidden{{/checklength}}">
+                        <img class="semester-icon" src="images/icon-purple-plus-20.png">
+                        <span>Add course</span>
+                    </div>
+                {{/if}}
+            </div>
+            <br>
+            <!-- WINTER -->
+            <img class="semester-icon" src="images/icon-winter-30.png">
+            <span class="semester">Winter Semester</span>
+            <hr>
+            <div class="courses" id="winter-courses">
+                {{#each semester.winter}}
+                    {{> course}}
+                {{/each}}
+                {{#if @first}}
+                    <div class="add-course{{#checklength semester.winter 4}} hidden{{/checklength}}">
+                        <img class="semester-icon" src="images/icon-purple-plus-20.png">
+                        <span>Add course</span>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    {{/each}}
+</script>

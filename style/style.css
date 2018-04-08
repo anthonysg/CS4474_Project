@@ -1,0 +1,513 @@
+body {
+    margin: 0;
+}
+
+.accordion {
+    background-color: white;
+    cursor: pointer;
+    border: none;
+    text-align: left;
+    color: gray;
+    outline: none;
+    padding: 10px 0px;
+    font-size: 14px;
+    transition: 0.4s;
+}
+
+.accordion:after {
+    content: '\25BC';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\25B2";
+}
+
+.alert {
+    display: none;
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    opacity: 1;
+    margin-bottom: 15px;
+    border-radius: 3px;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+
+.hidden {
+    display: none;
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 20% auto 0% auto;
+    padding: 20px 20px 20px 40px;
+    width: 40%;
+    border-radius: 6px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.modal-content p {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-content #modal-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.modal-content input {
+    border: none;
+    font-size: 16px;
+    vertical-align: middle;
+    width: 90%;
+}
+
+.modal-content .modal-icon {
+    vertical-align: middle;
+}
+
+.modal-content #modal-results {
+    height: 210px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.modal-content #modal-results .modal-img {
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.modal-content #modal-results p {
+    text-align: center;
+}
+
+.modal-content #modal-results li {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    margin-right: 25px;
+    padding: 5px;
+    border-radius: 3px;
+    list-style-type: none;
+    cursor: pointer;
+}
+
+.modal-content #modal-results li:hover {
+    background: #807F83;
+}
+
+.modal-content #modal-results #modal-search {
+    font-size: 16px;
+    color: lightgrey;
+}
+
+.modal-content hr {
+    margin: 5px 25px;
+}
+
+.modal-content button {
+    background-color: #4F2683;
+    color: white;
+    padding: 7px 14px;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#degree-major {
+    padding-bottom: 40px;
+}
+
+#degree-minor {
+    padding-bottom: 40px;
+}
+
+#degree-modal img {
+    float: left;
+}
+
+#degree-modal #degree-major-text {
+    float: left;
+    margin-left: 20px;
+}
+
+#degree-modal #degree-minor-text {
+    float: left;
+    margin-left: 20px;
+}
+
+#degree-modal span {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+#degree-modal #degree-major-text .title{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#degree-modal #degree-major-text .sub{
+    font-size: 12px;
+    color: gray;
+}
+
+#degree-modal #degree-minor-text .title{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#degree-modal #degree-minor-text .sub{
+    font-size: 11px;
+    color: gray;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+} 
+
+#nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0 25%;
+    overflow: hidden;
+    background-color: #4F2683;
+    display: flex;
+    align-items: center;
+}
+
+#nav li {
+    float: left;
+}
+
+#nav img {
+    padding: 5px;
+}
+
+#nav #options {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    margin-left: auto;
+}
+
+#nav #options img {
+    padding: 10px;
+}
+
+#nav > button {
+    background: #69409D;
+    border: none;
+    border-radius: 0px 3px 3px 0px;
+    padding: 0px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+#nav .dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+#course-registration .dropdown {
+    float: right;
+    overflow: hidden;
+}
+
+#nav .dropdown button {
+    background-color: #4F2683;
+    border: none;
+    color: white;
+    padding: 0;
+    cursor: pointer;
+}
+
+#course-registration .dropbtn {
+    background-color: #FFF;
+    border: none;
+    color: white;
+    padding: 0;
+    float: right;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 3px;
+    z-index: 1;
+}
+
+#nav .dropdown-content {
+    margin-left: -60px;
+    margin-top: 2px;
+}
+
+#course-registration .dropdown-content {
+    margin-left: -135px;
+    margin-top: 25px;
+}
+
+#nav .dropdown-content:after {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(249, 249, 249, 0);
+    border-bottom-color: #f9f9f9;
+    border-width: 7px;
+    margin-left: -7px;
+}
+
+.dropdown-content a {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #807F83;
+    border-radius: 3px;
+}
+
+.show {
+    display: block;
+}
+
+#nav input {
+    height: 21px;
+    padding: 6px;
+    margin-left: 13.5%;
+    border-radius: 3px 0px 0px 3px;
+    border: none;
+    flex: 1;
+    color: #f9f9f9;
+    background-color: #69409D;
+}
+
+.ui-autocomplete div {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
+.ui-state-active {
+    background: #4F2683 !important;
+    border: 0px solid #69409D !important;
+}
+
+.ui-autocomplete .ui-state-active {
+    background: #4F2683 !important;
+    border: 1px solid #69409D !important;
+}
+
+#wrapper {
+    display: flex;
+    min-height: 95vh;
+    height: auto;
+}
+
+#wrapper > div {
+    flex-basis: 0;
+}
+
+#wrapper > div:first-of-type { 
+    background-color: #F9F9F9;
+    flex-grow: 9;
+}
+
+#wrapper > div:nth-of-type(2) { 
+    flex-grow: 12;
+    background-color: white;
+    border: solid #EFF0F1;
+    border-width: 0 1px;
+}
+
+#wrapper > div:nth-of-type(3) { 
+    flex-grow: 7;
+    background-color: #F9F9F9;
+}
+
+#course-registration {
+    padding: 20px 30px;
+}
+
+#course-registration .title {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    margin: 10px 0px;
+}
+
+#course-registration .panel {
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+#course-registration span {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    margin: 10px 0px;
+    vertical-align: middle;
+}
+
+#course-registration .courses {
+    margin-left: 15px;
+}
+
+#course-registration .courses span {
+    margin: 10px 5px;
+}
+
+#course-registration .add-course {
+    cursor: pointer;
+}
+
+#course-registration .add-course span {
+    color: #4F2683;
+}
+
+#course-registration .semester {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 18px;
+}
+
+#course-registration img {
+    vertical-align: middle;
+}
+
+#course-registration .dropbtn {
+    display: none;
+}
+
+#course-registration .panel:first-of-type .dropbtn {
+    display: block;
+    margin: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+#course-registration hr {
+    border-top: 1px solid white;
+}
+
+#progress {
+    width: 200px;
+    float: right;
+}
+
+#progress > div {
+    margin: 10px;
+    padding: 6px 10px;
+    background: grey;
+    border-radius: 6px;
+}
+
+#progress span, 
+#progress p {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    color: white;
+    vertical-align: middle;
+}
+
+#progress p {
+    text-align: center;
+    margin: 10px 0px;
+}
+
+#progress #major-progress-text {
+    font-size: 11px;
+}
+
+#progress #minor-progress-text {
+    font-size: 10px;
+}
+
+#progress .progress-icon {
+    vertical-align: middle;
+}
+
+#progress .progress-img {
+    display: block;
+    margin: auto;
+    margin-top: 5px;
+}
+
+#progress-major .progress-img {
+    margin-top: 10px;
+    width: 120px;
+}
+
+#progress-major #progressbar {
+    height: 8px;
+    border-radius: 5px;
+    margin: 0px 19px;
+}
+
+#progress-minor #progressbar {
+    height: 5px;
+    border-radius: 4px;
+    margin: 0px 35px;
+}
+
+#progress .ui-progressbar-value {
+    border-radius: 10px;
+}
+
+#progress-home span {
+    margin-left: 5px;
+}
