@@ -839,7 +839,7 @@
             userData = data;
 
             // Put the object into storage
-            localStorage.setItem('userData', JSON.stringify(data));
+            localStorage.setItem('userData', JSON.stringify(userData));
 
             Handlebars.registerHelper('checklength', function (v1, v2, options) {
                 'use strict';
@@ -924,6 +924,23 @@
             // Removes course when pressed
             $(".remove-course").click(function() {
                 $(this).closest(".courses").find(".add-course").removeClass("hidden");
+                var semester = $(this).parent().parent().attr("id")
+                var course = $(this).parent().find('span').text();
+                if(semester == "fall-courses") {
+                    $.each(userData.semesters[0].semester.fall, function(index, value) {
+                        if(course == value.course) {
+                            userData.semesters[0].semester.fall.splice(index, 1);
+                        }
+                    });
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                } else if(semester == "winter-courses") {
+                    $.each(userData.semesters[0].semester.winter, function(index, value) {
+                        if(course == value.course) {
+                            userData.semesters[0].semester.winter.splice(index, 1);
+                        }
+                    });
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                }
                 $(this).parent().remove();
                 minorProgress();
                 majorProgress();
@@ -970,7 +987,24 @@
                     self = $(addLocation).prev();
                 }
                 self.find(".remove-course").click(function() {
-                    $(this).closest(".courses").find(".add-course").removeClass("hidden")
+                    $(this).closest(".courses").find(".add-course").removeClass("hidden");
+                    var semester = $(this).parent().parent().attr("id")
+                    var course = $(this).parent().find('span').text();
+                    if(semester == "fall-courses") {
+                        $.each(userData.semesters[0].semester.fall, function(index, value) {
+                            if(course == value.course) {
+                                userData.semesters[0].semester.fall.splice(index, 1);
+                            }
+                        });
+                        localStorage.setItem('userData', JSON.stringify(userData));
+                    } else if(semester == "winter-courses") {
+                        $.each(userData.semesters[0].semester.winter, function(index, value) {
+                            if(course == value.course) {
+                                userData.semesters[0].semester.winter.splice(index, 1);
+                            }
+                        });
+                        localStorage.setItem('userData', JSON.stringify(userData));
+                    }
                     $(this).parent().remove();
                     minorProgress();
                     majorProgress();
