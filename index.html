@@ -930,6 +930,7 @@
                     $.each(userData.semesters[0].semester.fall, function(index, value) {
                         if(course == value.course) {
                             userData.semesters[0].semester.fall.splice(index, 1);
+                            return false;
                         }
                     });
                     localStorage.setItem('userData', JSON.stringify(userData));
@@ -937,6 +938,7 @@
                     $.each(userData.semesters[0].semester.winter, function(index, value) {
                         if(course == value.course) {
                             userData.semesters[0].semester.winter.splice(index, 1);
+                            return false;
                         }
                     });
                     localStorage.setItem('userData', JSON.stringify(userData));
@@ -995,6 +997,7 @@
                         $.each(userData.semesters[0].semester.fall, function(index, value) {
                             if(course == value.course) {
                                 userData.semesters[0].semester.fall.splice(index, 1);
+                                return false;
                             }
                         });
                         localStorage.setItem('userData', JSON.stringify(userData));
@@ -1002,6 +1005,7 @@
                         $.each(userData.semesters[0].semester.winter, function(index, value) {
                             if(course == value.course) {
                                 userData.semesters[0].semester.winter.splice(index, 1);
+                                return false;
                             }
                         });
                         localStorage.setItem('userData', JSON.stringify(userData));
