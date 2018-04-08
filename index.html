@@ -91,6 +91,7 @@
         border: none;
         font-size: 16px;
         vertical-align: middle;
+        width: 90%;
     }
 
     .modal-content .modal-icon {
@@ -569,8 +570,9 @@
                     <div id="modal-results">
                     </div>
                     <div class="alert">
-                        <span class="closebtn">&times;</span>  
-                        <strong>Error</strong>: Semester full
+                        <span class="closebtn">&times;</span>
+                        <div class="alert-text">
+                        </div>
                     </div>
                     <button id="modal-button">Add course</button>
                 </div>
@@ -749,6 +751,12 @@
         });
     }
 
+    // Change the content of the alert
+    function alertText(html) {
+        $('.alert-text').empty();
+        $('.alert-text').append(html);
+    }
+
     $(document).ready(function() {
 
         $.getJSON("data/user.json", userCallback);
@@ -917,6 +925,15 @@
             $("#modal-button").click(function(){
                 var courseTemplate = Handlebars.compile($('#course-partial').html());
                 var name = $('#modal-results').find('.ui-state-active').text();
+                if(name.length == 0) {
+                    alertText('<strong>Error</strong>: Class not selected');
+                    if($(".alert").css("display") == "block") {
+                        $(".alert").effect("shake", {times:3, distance:10}, 400);
+                    } else {
+                        $(".alert").fadeIn(300);
+                    }
+                    return;
+                }
                 var addCourse = courseTemplate({course: name});
                 if($(addLocation).parent().attr("id") == "all-courses") {
                     var courseCode = name.split(" ", 2)[1].slice(-1);
@@ -925,7 +942,12 @@
                     else
                         self = $("#winter-courses").find(".add-course");
                     if($(self).closest(".courses").find(".course").length >= 5) {
-                        $(".alert").fadeIn(300);
+                        alertText('<strong>Error</strong>: Semester full');
+                        if($(".alert").css("display") == "block") {
+                            $(".alert").effect("shake", {times:3, distance:10}, 400);
+                        } else {
+                            $(".alert").fadeIn(300);
+                        }
                         return;
                     }
                     self.before(addCourse);
