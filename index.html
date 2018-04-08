@@ -759,7 +759,16 @@
 
     $(document).ready(function() {
 
-        $.getJSON("data/user.json", userCallback);
+        // Retrieve the object from storage
+        var savedUser = localStorage.getItem('userData');
+        
+        // Get json from file if not in local storage
+        if(savedUser == null) {
+            $.getJSON("data/user.json", userCallback);
+        } else {
+            userCallback(JSON.parse(savedUser));
+        }
+
         $.getJSON("data/courses.json", function(data) {
             fallData = [];
             winterData = [];
@@ -826,7 +835,11 @@
 
         // Things to do after getting user data
         function userCallback(data) {
+
             userData = data;
+
+            // Put the object into storage
+            localStorage.setItem('userData', JSON.stringify(data));
 
             Handlebars.registerHelper('checklength', function (v1, v2, options) {
                 'use strict';
