@@ -780,7 +780,7 @@ jsonCourses = `{
 	}, {
 		"course": "BIBLSTUD 5110A - INTRO TO BIBLE AS SCRIPTURE"
 	}, {
-		"course": "BIBLSTUD 5119A - QUR&amp;#39;AN, SUNNAH &amp; HADITH"
+		"course": "BIBLSTUD 5119A - QUR'AN, SUNNAH &amp; HADITH"
 	}, {
 		"course": "BIBLSTUD 5209A - SELECTED TOPICS"
 	}, {
@@ -1264,7 +1264,7 @@ jsonCourses = `{
 	}, {
 		"course": "WOMENST 2205F - MAKING MEN:CRITICAL STUDIES"
 	}, {
-		"course": "WOMENST 2211F - SPEC TOPICS IN WOMEN&amp;#39;S WRITING"
+		"course": "WOMENST 2211F - SPEC TOPICS IN WOMEN'S WRITING"
 	}, {
 		"course": "WOMENST 2263F - INTERSECTIONS: RACE, CLASS"
 	}, {
@@ -1276,7 +1276,7 @@ jsonCourses = `{
 	}, {
 		"course": "WOMENST 3350F - FEMINISM ACROSS BORDERS"
 	}, {
-		"course": "WOMENST 3358F - ADV TOPICS IN WOMEN&amp;#39;S STUDIES"
+		"course": "WOMENST 3358F - ADV TOPICS IN WOMEN'S STUDIES"
 	}, {
 		"course": "WOMENST 4458F - ADV SEM IN FEMINIST THRY &amp; PRC"
 	}, {
@@ -1546,7 +1546,7 @@ jsonCourses = `{
 	}, {
 		"course": "PHILOSOP 4023F - SP TOP EARLY MEDIEVAL PHIL"
 	}, {
-		"course": "PHILOSOP 4050F - KANT&amp;#39;S FIRST CRITIQUE"
+		"course": "PHILOSOP 4050F - KANT'S FIRST CRITIQUE"
 	}, {
 		"course": "PHILOSOP 4077F - SEMINAR IN 20TH C PHILOSOPHY"
 	}, {
@@ -1792,13 +1792,13 @@ jsonCourses = `{
 	}, {
 		"course": "BIOLOGY 4970F - INDEPENDENT STUDY IN BIOLOGY"
 	}, {
-		"course": "WRITING 0010F - ACAD WRITING, INT&amp;#39;L STUDENTS"
+		"course": "WRITING 0010F - ACAD WRITING, INT'L STUDENTS"
 	}, {
 		"course": "WRITING 0011F - INTRO TO BASIC ACAD WRITING"
 	}, {
-		"course": "WRITING 0015F - ADV ACAD WRITING INT&amp;#39;L STUDENT"
+		"course": "WRITING 0015F - ADV ACAD WRITING INT'L STUDENT"
 	}, {
-		"course": "WRITING 1000F - THE WRITERS&amp;#39; STUDIO"
+		"course": "WRITING 1000F - THE WRITERS' STUDIO"
 	}, {
 		"course": "WRITING 1002F - INTRO TO WRITING IN ENGLISH"
 	}, {
@@ -1850,7 +1850,7 @@ jsonCourses = `{
 	}, {
 		"course": "ITALIAN 2500F - BRIDGING CLASSROOM &amp; COMMUNITY"
 	}, {
-		"course": "ENGLISH 1027F - STORYTELLER&amp;#39;S ART I:INTRO TO N"
+		"course": "ENGLISH 1027F - STORYTELLER'S ART I:INTRO TO N"
 	}, {
 		"course": "ENGLISH 2028F - LITERATURE AND FILM"
 	}, {
@@ -2459,7 +2459,7 @@ jsonCourses = `{
 	}, {
 		"course": "THEOETH 5203B - THEO ETHICS"
 	}, {
-		"course": "WOMENST 1020E - INTRODUCTION TO WOMEN&amp;#39;S STUDIE"
+		"course": "WOMENST 1020E - INTRODUCTION TO WOMEN'S STUDIE"
 	}, {
 		"course": "WOMENST 1022G - GENDER, JUSTICE, CHANGE"
 	}, {
@@ -2477,7 +2477,7 @@ jsonCourses = `{
 	}, {
 		"course": "WOMENST 2244 - WOMEN AND HEALTH"
 	}, {
-		"course": "WOMENST 2259G - SPECIAL TOPICS WOMEN&amp;#39;S STUDIES"
+		"course": "WOMENST 2259G - SPECIAL TOPICS WOMEN'S STUDIES"
 	}, {
 		"course": "WOMENST 2270B - WOMEN, LAW AND SOCIAL CHANGE"
 	}, {
@@ -2495,13 +2495,13 @@ jsonCourses = `{
 	}, {
 		"course": "WOMENST 3357G - ADVANCED TOPICS"
 	}, {
-		"course": "WOMENST 3362G - SPEC TOPICS IN WOMEN&amp;#39;S STUDIES"
+		"course": "WOMENST 3362G - SPEC TOPICS IN WOMEN'S STUDIES"
 	}, {
 		"course": "WOMENST 4455E - HONORS THESIS"
 	}, {
-		"course": "WOMENST 4459G - SPEC TOPICS IN WOMEN&amp;#39;S STUDIES"
+		"course": "WOMENST 4459G - SPEC TOPICS IN WOMEN'S STUDIES"
 	}, {
-		"course": "WOMENST 4464G - SPEC TOPICS IN WOMEN&amp;#39;S STUDIES"
+		"course": "WOMENST 4464G - SPEC TOPICS IN WOMEN'S STUDIES"
 	}, {
 		"course": "SPIRTHEO 5269B - SELECTED TOPICS"
 	}, {
@@ -2613,7 +2613,7 @@ jsonCourses = `{
 	}, {
 		"course": "CSI 2225G - SYSTEMS &amp; CHILDHOODS"
 	}, {
-		"course": "CSI 2251G - CHILDREN&amp;#39;S RIGHTS IN SCHOOLS"
+		"course": "CSI 2251G - CHILDREN'S RIGHTS IN SCHOOLS"
 	}, {
 		"course": "CSI 2256G - FAMILY LAW AND POLITICS"
 	}, {
@@ -3767,7 +3767,7 @@ jsonCourses = `{
 	}, {
 		"course": "ECONOMIC 2160B - PUBLIC FINANCE - REVENUE"
 	}, {
-		"course": "ECONOMIC 2162B - COMPARATIVE INT&amp;#39;L BUSINESS"
+		"course": "ECONOMIC 2162B - COMPARATIVE INT'L BUSINESS"
 	}, {
 		"course": "ECONOMIC 2163B - INTERNATIONAL TRADE"
 	}, {
@@ -4385,7 +4385,7 @@ jsonCourses = `{
 	}, {
 		"course": "SOCIOLOG 2271B - SURVEY OF CONTEMPORARY THEORY"
 	}, {
-		"course": "SOCIOLOG 2281B - INT&amp;#39;L MIGRATN IN GLBLZED WRLD"
+		"course": "SOCIOLOG 2281B - INT'L MIGRATN IN GLBLZED WRLD"
 	}, {
 		"course": "SOCIOLOG 2299B - SPECIAL TOPICS IN SOCIOLOGY"
 	}, {
@@ -4579,11 +4579,11 @@ jsonCourses = `{
 	}, {
 		"course": "WRITING 0005X - CRIT READING, EFF WRITING"
 	}, {
-		"course": "WRITING 0010G - ACAD WRITING, INT&amp;#39;L STUDENTS"
+		"course": "WRITING 0010G - ACAD WRITING, INT'L STUDENTS"
 	}, {
-		"course": "WRITING 0015G - ADV ACAD WRITING INT&amp;#39;L STUDENT"
+		"course": "WRITING 0015G - ADV ACAD WRITING INT'L STUDENT"
 	}, {
-		"course": "WRITING 1000G - THE WRITERS&amp;#39; STUDIO"
+		"course": "WRITING 1000G - THE WRITERS' STUDIO"
 	}, {
 		"course": "WRITING 1002G - INTRO TO WRITING IN ENGLISH"
 	}, {
@@ -4743,7 +4743,7 @@ jsonCourses = `{
 	}, {
 		"course": "ENGLISH 1024E - FORMS OF FICTION"
 	}, {
-		"course": "ENGLISH 1028G - STORYTELLER&amp;#39;S ART II:TOPICS IN"
+		"course": "ENGLISH 1028G - STORYTELLER'S ART II:TOPICS IN"
 	}, {
 		"course": "ENGLISH 1042E - LITERATURE &amp; CULTURAL REP"
 	}, {
@@ -4751,7 +4751,7 @@ jsonCourses = `{
 	}, {
 		"course": "ENGLISH 2017 - READING POPULAR CULTURE"
 	}, {
-		"course": "ENGLISH 2033E - CHILDREN&amp;#39;S LITERATURE"
+		"course": "ENGLISH 2033E - CHILDREN'S LITERATURE"
 	}, {
 		"course": "ENGLISH 2071G - SPECULATV FICTN: SCIENCE FICTN"
 	}, {
