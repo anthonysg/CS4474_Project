@@ -1,0 +1,1 @@
+Due to some issues with some browsers blocking the loading of scripts as local files, the application is best supported by Firefox then Chrome.
